@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Primal Prints | Tactical 3D Printed Gear</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-18%20-18%2036%2036%22%3E%3Crect%20x%3D%22-18%22%20y%3D%22-18%22%20width%3D%2236%22%20height%3D%2236%22%20rx%3D%227%22%20fill%3D%22%230f0f0f%22%2F%3E%3Ccircle%20r%3D%2211.5%22%20fill%3D%22none%22%20stroke%3D%22%23d32f2f%22%20stroke-width%3D%221.725%22%2F%3E%3Cg%20stroke%3D%22%23d32f2f%22%20stroke-width%3D%221.5%22%3E%3Cline%20x1%3D%2213.3%22%20y1%3D%220%22%20x2%3D%2216.8%22%20y2%3D%220%22%2F%3E%3Cline%20x1%3D%22-13.3%22%20y1%3D%220%22%20x2%3D%22-16.8%22%20y2%3D%220%22%2F%3E%3Cline%20x1%3D%220%22%20y1%3D%22-13.3%22%20x2%3D%220%22%20y2%3D%22-16.8%22%2F%3E%3Cline%20x1%3D%220%22%20y1%3D%2213.3%22%20x2%3D%220%22%20y2%3D%2216.8%22%2F%3E%3C%2Fg%3E%3Cpolygon%20points%3D%220%2C-7.13%204.6%2C1.15%201.96%2C1.15%201.96%2C6.9%20-1.96%2C6.9%20-1.96%2C1.15%20-4.6%2C1.15%22%20fill%3D%22%23f5f5f5%22%2F%3E%3Cpolygon%20points%3D%220%2C-3.45%201.73%2C0.46%20-1.73%2C0.46%22%20fill%3D%22%23d32f2f%22%2F%3E%3C%2Fsvg%3E">
+<meta name="theme-color" content="#0f0f0f">
 <style>
 * {
   margin: 0;
@@ -36,10 +38,33 @@ nav {
 }
 
 .logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   font-size: 20px;
   font-weight: 700;
   letter-spacing: 1px;
   color: #fff;
+}
+
+.logo-mark {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+}
+
+.hero-mark {
+  display: block;
+  width: 112px;
+  height: 112px;
+  margin: 0 auto 2rem;
+}
+
+.footer-mark {
+  width: 46px;
+  height: 46px;
+  margin-bottom: 1rem;
+  opacity: 0.85;
 }
 
 .nav-links {
@@ -266,7 +291,7 @@ footer {
   }
 
   .nav-links {
-    gap: 1rem;
+    gap: 0.85rem;
     font-size: 12px;
   }
 
@@ -281,6 +306,35 @@ footer {
   .section-title {
     font-size: 24px;
   }
+
+  .hero-mark {
+    width: 84px;
+    height: 84px;
+    margin-bottom: 1.5rem;
+  }
+
+  .logo-mark {
+    width: 34px;
+    height: 34px;
+  }
+
+  .logo {
+    font-size: 14px;
+    gap: 9px;
+    letter-spacing: 0.5px;
+  }
+
+  .logo span {
+    white-space: nowrap;
+  }
+
+  header {
+    padding: 1rem 1.25rem;
+  }
+
+  .nav-links a {
+    font-size: 12px;
+  }
 }
 </style>
 </head>
@@ -288,7 +342,20 @@ footer {
 
 <header>
   <nav>
-    <div class="logo">PRIMAL PRINTS</div>
+    <div class="logo">
+    <svg class="logo-mark" viewBox="-18 -18 36 36" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Primal Prints logo">
+      <circle r="11.5" fill="none" stroke="#d32f2f" stroke-width="1.725"/>
+      <g stroke="#d32f2f" stroke-width="1.5">
+        <line x1="13.3" y1="0" x2="16.8" y2="0"/>
+        <line x1="-13.3" y1="0" x2="-16.8" y2="0"/>
+        <line x1="0" y1="-13.3" x2="0" y2="-16.8"/>
+        <line x1="0" y1="13.3" x2="0" y2="16.8"/>
+      </g>
+      <polygon points="0,-7.13 4.6,1.15 1.96,1.15 1.96,6.9 -1.96,6.9 -1.96,1.15 -4.6,1.15" fill="#f5f5f5"/>
+      <polygon points="0,-3.45 1.73,0.46 -1.73,0.46" fill="#d32f2f"/>
+    </svg>
+    <span>PRIMAL PRINTS</span>
+    </div>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#products">Products</a></li>
@@ -299,6 +366,17 @@ footer {
 
 <section class="hero">
   <div class="hero-content">
+    <svg class="hero-mark" viewBox="-18 -18 36 36" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Primal Prints logo">
+      <circle r="11.5" fill="none" stroke="#d32f2f" stroke-width="1.725"/>
+      <g stroke="#d32f2f" stroke-width="1.5">
+        <line x1="13.3" y1="0" x2="16.8" y2="0"/>
+        <line x1="-13.3" y1="0" x2="-16.8" y2="0"/>
+        <line x1="0" y1="-13.3" x2="0" y2="-16.8"/>
+        <line x1="0" y1="13.3" x2="0" y2="16.8"/>
+      </g>
+      <polygon points="0,-7.13 4.6,1.15 1.96,1.15 1.96,6.9 -1.96,6.9 -1.96,1.15 -4.6,1.15" fill="#f5f5f5"/>
+      <polygon points="0,-3.45 1.73,0.46 -1.73,0.46" fill="#d32f2f"/>
+    </svg>
     <h1>Precision-Crafted Tactical Gear</h1>
     <p>3D-printed equipment designed by a law enforcement veteran for professionals who demand capability over hype.</p>
     <a href="#contact" class="cta-button">Get In Touch</a>
@@ -378,6 +456,17 @@ footer {
 </section>
 
 <footer>
+  <svg class="footer-mark" viewBox="-18 -18 36 36" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Primal Prints logo">
+      <circle r="11.5" fill="none" stroke="#d32f2f" stroke-width="1.725"/>
+      <g stroke="#d32f2f" stroke-width="1.5">
+        <line x1="13.3" y1="0" x2="16.8" y2="0"/>
+        <line x1="-13.3" y1="0" x2="-16.8" y2="0"/>
+        <line x1="0" y1="-13.3" x2="0" y2="-16.8"/>
+        <line x1="0" y1="13.3" x2="0" y2="16.8"/>
+      </g>
+      <polygon points="0,-7.13 4.6,1.15 1.96,1.15 1.96,6.9 -1.96,6.9 -1.96,1.15 -4.6,1.15" fill="#f5f5f5"/>
+      <polygon points="0,-3.45 1.73,0.46 -1.73,0.46" fill="#d32f2f"/>
+    </svg>
   <p>&copy; 2026 Primal Prints. Built for professionals.</p>
 </footer>
 
