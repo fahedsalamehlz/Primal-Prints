@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Primal Prints | Tactical 3D Printed Gear</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-18%20-18%2036%2036%22%3E%3Crect%20x%3D%22-18%22%20y%3D%22-18%22%20width%3D%2236%22%20height%3D%2236%22%20rx%3D%227%22%20fill%3D%22%230f0f0f%22%2F%3E%3Ccircle%20r%3D%2211.5%22%20fill%3D%22none%22%20stroke%3D%22%23d32f2f%22%20stroke-width%3D%221.725%22%2F%3E%3Cg%20stroke%3D%22%23d32f2f%22%20stroke-width%3D%221.5%22%3E%3Cline%20x1%3D%2213.3%22%20y1%3D%220%22%20x2%3D%2216.8%22%20y2%3D%220%22%2F%3E%3Cline%20x1%3D%22-13.3%22%20y1%3D%220%22%20x2%3D%22-16.8%22%20y2%3D%220%22%2F%3E%3Cline%20x1%3D%220%22%20y1%3D%22-13.3%22%20x2%3D%220%22%20y2%3D%22-16.8%22%2F%3E%3Cline%20x1%3D%220%22%20y1%3D%2213.3%22%20x2%3D%220%22%20y2%3D%2216.8%22%2F%3E%3C%2Fg%3E%3Cpolygon%20points%3D%220%2C-7.13%204.6%2C1.15%201.96%2C1.15%201.96%2C6.9%20-1.96%2C6.9%20-1.96%2C1.15%20-4.6%2C1.15%22%20fill%3D%22%23f5f5f5%22%2F%3E%3Cpolygon%20points%3D%220%2C-3.45%201.73%2C0.46%20-1.73%2C0.46%22%20fill%3D%22%23d32f2f%22%2F%3E%3C%2Fsvg%3E">
+<meta name="theme-color" content="#0f0f0f">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #0f0f0f;
+  color: #e8e8e8;
+  line-height: 1.6;
+}
+
+header {
+  background: #1a1a1a;
+  border-bottom: 1px solid #2a2a2a;
+  padding: 1.5rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+nav {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #fff;
+}
+
+.logo-mark {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+}
+
+.hero-mark {
+  display: block;
+  width: 112px;
+  height: 112px;
+  margin: 0 auto 2rem;
+}
+
+.footer-mark {
+  width: 46px;
+  height: 46px;
+  margin-bottom: 1rem;
+  opacity: 0.85;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  color: #b0b0b0;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover {
+  color: #fff;
+}
+
+.hero {
+  background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+  border-bottom: 1px solid #2a2a2a;
+  padding: 6rem 2rem;
+  text-align: center;
+}
+
+.hero-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.hero h1 {
+  font-size: 48px;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+}
+
+.hero p {
+  font-size: 18px;
+  color: #a0a0a0;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-button {
+  display: inline-block;
+  background: #d32f2f;
+  color: #fff;
+  padding: 12px 32px;
+  border-radius: 2px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.cta-button:hover {
+  background: #b71c1c;
+}
+
+.section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  border-bottom: 1px solid #2a2a2a;
+  scroll-margin-top: 96px;
+}
+
+.section-title {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 3rem;
+  color: #fff;
+  text-align: left;
+}
+
+.about-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.about-text h3 {
+  font-size: 20px;
+  margin-bottom: 1rem;
+  color: #fff;
+  font-weight: 600;
+}
+
+.about-text p {
+  color: #a0a0a0;
+  margin-bottom: 1rem;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.features-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.features-list li {
+  color: #a0a0a0;
+  font-size: 15px;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.features-list li:before {
+  content: "▪";
+  position: absolute;
+  left: 0;
+  color: #d32f2f;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.product-card {
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  padding: 2rem;
+  border-radius: 2px;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.product-card:hover {
+  border-color: #d32f2f;
+  background: #222;
+}
+
+.product-icon {
+  font-size: 32px;
+  margin-bottom: 1rem;
+  color: #d32f2f;
+}
+
+.product-card h3 {
+  font-size: 18px;
+  margin-bottom: 0.75rem;
+  color: #fff;
+  font-weight: 600;
+}
+
+.product-card p {
+  color: #808080;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.contact-section {
+  background: #1a1a1a;
+  padding: 4rem 2rem;
+  scroll-margin-top: 96px;
+}
+
+.contact-content {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.contact-content p {
+  color: #a0a0a0;
+  font-size: 15px;
+  margin-bottom: 2rem;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+  background: #0f0f0f;
+  border: 1px solid #2a2a2a;
+  color: #e8e8e8;
+  padding: 12px;
+  border-radius: 2px;
+  font-family: inherit;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: #d32f2f;
+}
+
+.contact-form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+footer {
+  background: #0a0a0a;
+  border-top: 1px solid #2a2a2a;
+  padding: 3rem 2rem;
+  text-align: center;
+  color: #606060;
+  font-size: 13px;
+}
+
+.shop-note {
+  color: #808080;
+  font-size: 14px;
+  margin: -2rem 0 2.5rem;
+}
+
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.shop-card {
+  display: flex;
+  flex-direction: column;
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 2px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.shop-card:hover {
+  border-color: #d32f2f;
+}
+
+.shop-photo {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: #131313;
+  border-bottom: 1px solid #2a2a2a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.shop-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.shop-photo svg {
+  width: 56px;
+  height: 56px;
+  opacity: 0.22;
+}
+
+.shop-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.75rem;
+  padding: 1.5rem;
+}
+
+.shop-body h3 {
+  font-size: 17px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.shop-body p {
+  color: #808080;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.shop-specs {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.shop-specs li {
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #9a9a9a;
+  border: 1px solid #2f2f2f;
+  border-radius: 2px;
+  padding: 3px 8px;
+}
+
+.shop-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: auto;
+  padding-top: 0.5rem;
+}
+
+.price {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.price small {
+  display: block;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #707070;
+}
+
+.buy {
+  background: #d32f2f;
+  color: #fff;
+  padding: 10px 22px;
+  border-radius: 2px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+.buy:hover {
+  background: #b71c1c;
+}
+
+.buy.secondary {
+  background: transparent;
+  border: 1px solid #3a3a3a;
+  color: #cfcfcf;
+}
+
+.buy.secondary:hover {
+  background: #222;
+  border-color: #d32f2f;
+}
+
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 32px;
+  }
+
+  .nav-links {
+    gap: 0.85rem;
+    font-size: 12px;
+  }
+
+  .about-content {
+    grid-template-columns: 1fr;
+  }
+
+  .section {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .section-title {
+    font-size: 24px;
+  }
+
+  .hero-mark {
+    width: 84px;
+    height: 84px;
+    margin-bottom: 1.5rem;
+  }
+
+  .logo-mark {
+    width: 34px;
+    height: 34px;
+  }
+
+  .logo {
+    font-size: 14px;
+    gap: 9px;
+    letter-spacing: 0.5px;
+  }
+
+  .logo span {
+    white-space: nowrap;
+  }
+
+  header {
+    padding: 1rem 1.25rem;
+  }
+
+  .nav-links a {
+    font-size: 12px;
+  }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo">
+    <svg class="logo-mark" viewBox="-18 -18 36 36" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Primal Prints logo">
+      <circle r="11.5" fill="none" stroke="#d32f2f" stroke-width="1.725"/>
+      <g stroke="#d32f2f" stroke-width="1.5">
+        <line x1="13.3" y1="0" x2="16.8" y2="0"/>
+        <line x1="-13.3" y1="0" x2="-16.8" y2="0"/>
+        <line x1="0" y1="-13.3" x2="0" y2="-16.8"/>
+        <line x1="0" y1="13.3" x2="0" y2="16.8"/>
+      </g>
+      <polygon points="0,-7.13 4.6,1.15 1.96,1.15 1.96,6.9 -1.96,6.9 -1.96,1.15 -4.6,1.15" fill="#f5f5f5"/>
+      <polygon points="0,-3.45 1.73,0.46 -1.73,0.46" fill="#d32f2f"/>
+    </svg>
+    <span>PRIMAL PRINTS</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#shop">Shop</a></li>
+      <li><a href="#products">Custom</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <svg class="hero-mark" viewBox="-18 -18 36 36" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Primal Prints logo">
+      <circle r="11.5" fill="none" stroke="#d32f2f" stroke-width="1.725"/>
+      <g stroke="#d32f2f" stroke-width="1.5">
+        <line x1="13.3" y1="0" x2="16.8" y2="0"/>
+        <line x1="-13.3" y1="0" x2="-16.8" y2="0"/>
+        <line x1="0" y1="-13.3" x2="0" y2="-16.8"/>
+        <line x1="0" y1="13.3" x2="0" y2="16.8"/>
+      </g>
+      <polygon points="0,-7.13 4.6,1.15 1.96,1.15 1.96,6.9 -1.96,6.9 -1.96,1.15 -4.6,1.15" fill="#f5f5f5"/>
+      <polygon points="0,-3.45 1.73,0.46 -1.73,0.46" fill="#d32f2f"/>
+    </svg>
+    <h1>Precision-Crafted Tactical Gear</h1>
+    <p>3D-printed equipment designed by a law enforcement veteran for professionals who demand capability over hype.</p>
+    <a href="#contact" class="cta-button">Get In Touch</a>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <h2 class="section-title">Built by Experience</h2>
+  <div class="about-content">
+    <div class="about-text">
+      <h3>Gear Made Right</h3>
+      <p>Twelve years in law enforcement taught me what works and what doesn't. Every Primal Prints product is engineered for durability, function, and precision—nothing else matters.</p>
+      <p>We don't chase trends. We make equipment for people who understand that reliability isn't negotiable.</p>
+      <ul class="features-list">
+        <li>Ex-LEO design and testing</li>
+        <li>Precision 3D manufacturing</li>
+        <li>Field-tested durability</li>
+        <li>Custom configurations available</li>
+      </ul>
+    </div>
+    <div class="about-text">
+      <h3>Why 3D Printing</h3>
+      <p>Additive manufacturing lets us iterate faster, customize without tooling costs, and produce equipment that meets exact specifications.</p>
+      <p>Modern tactical gear doesn't need to come from overseas factories. It can be crafted locally, precisely, and with complete control over quality.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="shop">
+  <h2 class="section-title">Shop</h2>
+  <p class="shop-note" id="shop-note"></p>
+  <div class="shop-grid" id="shop-grid"></div>
+</section>
+
+<section class="section" id="products">
+  <h2 class="section-title">Custom Work</h2>
+  <p class="shop-note">Beyond the shop above, these are the kinds of builds we take on by request. Tell us what you need and we will quote it.</p>
+  <div class="products-grid">
+    <div class="product-card">
+      <div class="product-icon">📦</div>
+      <h3>Magazine Systems</h3>
+      <p>Custom mag holders and carriers designed for secure retention and rapid access. MOLLE-compatible and modular.</p>
+    </div>
+    <div class="product-card">
+      <div class="product-icon">🔫</div>
+      <h3>Weapon Mounts</h3>
+      <p>Precision optic risers, light mounts, and rail accessories. Tested for zero retention and repeatability.</p>
+    </div>
+    <div class="product-card">
+      <div class="product-icon">🎒</div>
+      <h3>Duty Gear</h3>
+      <p>Organizers, attachment points, and modular solutions for duty belts, packs, and professional load-outs.</p>
+    </div>
+    <div class="product-card">
+      <div class="product-icon">🏹</div>
+      <h3>Range Equipment</h3>
+      <p>Shooting accessories, tool organizers, and range-specific gear for training and match competition.</p>
+    </div>
+    <div class="product-card">
+      <div class="product-icon">⚙️</div>
+      <h3>Custom Fabrication</h3>
+      <p>Need something specific? We work directly with customers on custom designs and one-off builds.</p>
+    </div>
+    <div class="product-card">
+      <div class="product-icon">🔧</div>
+      <h3>Prototype & Development</h3>
+      <p>Ideas to reality. From concept to functional prototype, we iterate fast and test hard.</p>
+    </div>
+  </div>
+</section>
+
+<section class="contact-section" id="contact">
+  <div class="contact-content">
+    <h2 class="section-title">Get In Touch</h2>
+    <p>Have questions about products, need a custom build, or want to discuss your specific needs? Contact us below.</p>
+    <form class="contact-form" onsubmit="handleSubmit(event)">
+      <input type="text" placeholder="Name" required>
+      <input type="email" placeholder="Email" required>
+      <textarea placeholder="Tell us what you need..."></textarea>
+      <button type="submit" class="cta-button">Send Inquiry</button>
+    </form>
+    <p style="color: #606060; font-size: 13px;">Response time: 24-48 hours &mdash; or email <a href="mailto:fahedsalamehlz@gmail.com" style="color:#d32f2f;text-decoration:none;">fahedsalamehlz@gmail.com</a> directly.</p>
+  </div>
+</section>
+
+<footer>
+  <svg class="footer-mark" viewBox="-18 -18 36 36" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Primal Prints logo">
+      <circle r="11.5" fill="none" stroke="#d32f2f" stroke-width="1.725"/>
+      <g stroke="#d32f2f" stroke-width="1.5">
+        <line x1="13.3" y1="0" x2="16.8" y2="0"/>
+        <line x1="-13.3" y1="0" x2="-16.8" y2="0"/>
+        <line x1="0" y1="-13.3" x2="0" y2="-16.8"/>
+        <line x1="0" y1="13.3" x2="0" y2="16.8"/>
+      </g>
+      <polygon points="0,-7.13 4.6,1.15 1.96,1.15 1.96,6.9 -1.96,6.9 -1.96,1.15 -4.6,1.15" fill="#f5f5f5"/>
+      <polygon points="0,-3.45 1.73,0.46 -1.73,0.46" fill="#d32f2f"/>
+    </svg>
+  <p>&copy; 2026 Primal Prints. Built for professionals.</p>
+</footer>
+
+<script>
+/* ------------------------------------------------------------------
+   SHOP - edit PRODUCTS to add, remove, or reprice items.
+   image: photo path in this repo, e.g. "photos/4592922499.jpg" ("" = placeholder)
+   price: number or range, no dollar sign ("" = shows "Ask")
+   etsy:  the Etsy listing URL ("" = button points at the contact form instead)
+------------------------------------------------------------------- */
+const SHOP_NOTE = "Every piece is printed to order in Arizona. Checkout, personalization and shipping are handled through our Etsy shop \u2014 prices shown are the current Etsy prices.";
+
+const PRODUCTS = [
+  {
+    name: "Personalized Police Badge Ornament",
+    blurb: "Two-color badge ornament with raised lettering \u2014 name, badge number and year. Shield or 7-point star, eight badge colors, and a carabiner clip included so it hangs on a tree, a duty bag or a mirror.",
+    specs: ["Shield or star", "8 colors", "Clip included", "Free shipping"],
+    price: "14.99",
+    image: "photos/4592922499.jpg",
+    etsy: "https://www.etsy.com/listing/4592922499"
+  },
+  {
+    name: "5.56 Ammo Can Organizer System",
+    blurb: "Snap trays and vertical inserts that share one footprint, so they stack and mix inside a steel 50 cal M2A1 can \u2014 up to 732 rounds. Each round sits in a contoured trough and clicks into two flexible posts; turn a tray over and nothing falls out.",
+    specs: ["M2A1 50 cal can", "Up to 732 rds", "Trays, inserts, caps", "Ammo not included"],
+    price: "20.99 \u2013 69.99",
+    image: "photos/4591281149.jpg",
+    etsy: "https://www.etsy.com/listing/4591281149"
+  },
+  {
+    name: "9mm Ammo Box, 50 Round",
+    blurb: "Fifty rounds standing upright in tapered pockets that grip the case head, so nothing rattles or spills in a range bag. Pin hinge, no screws, and a snap bead running the full front and halfway down both sides.",
+    specs: ["PETG or ASA", "50 or 25 round", "Pin hinge", "Custom colors"],
+    price: "15.00 \u2013 23.00",
+    image: "photos/4592086667.jpg",
+    etsy: "https://www.etsy.com/listing/4592086667"
+  },
+  {
+    name: "Rigid MOLLE Seat Back Panel Kit",
+    blurb: "Four grid tiles that assemble into an 18 x 16 inch seat-back panel \u2014 12 columns by 8 rows of true PALS space on a hard surface that will not sag under loaded pouches. Grid spacing runs continuous across the seams.",
+    specs: ["4-pack", "18 x 16 in", "True PALS spacing", "M3 bolt grid"],
+    price: "49.99",
+    image: "photos/4574884079.jpg",
+    etsy: "https://www.etsy.com/listing/4574884079"
+  },
+  {
+    name: "Rigid MOLLE Grid Tile",
+    blurb: "A single tile that turns a seat back, wall or workbench into a modular attachment point. Real PALS spacing so pouches you already own thread on straight, plus a row of M3 bolt holes on every vertical bar for hard-mounting.",
+    specs: ["Single tile", "True PALS spacing", "M3 bolt grid", "Made in USA"],
+    price: "18.99",
+    image: "photos/4574901372.jpg",
+    etsy: "https://www.etsy.com/listing/4574901372"
+  },
+  {
+    name: "Tactical Pistol Business Card Holder",
+    blurb: "The pistol sits inverted on its stand and cards feed up through a slot cut clean through the frame \u2014 the card comes out of the gun, not a tray behind it. Slide serrations, ejection port, accessory rail, bored-out muzzle.",
+    specs: ["6 in or 8 in", "Two-color name inlay", "Badge number option"],
+    price: "15.00 \u2013 25.00",
+    image: "photos/4572398753.jpg",
+    etsy: "https://www.etsy.com/listing/4572398753"
+  },
+  {
+    name: "IPSC Target Coaster Set",
+    blurb: "Four silhouette coasters with A, C and D scoring zones, stacked in a matching target-shaped caddy with your name on the front plate. Printed in PETG, so hot mugs and sweating glasses are not a problem.",
+    specs: ["PETG", "4 coasters + caddy", "Cork backed", "2-line name plate"],
+    price: "23.00 \u2013 33.00",
+    image: "photos/4590410110.jpg",
+    etsy: "https://www.etsy.com/listing/4590410110"
+  },
+  {
+    name: "Ammo Can Coaster Set",
+    blurb: "A coaster set that lives in its own .30 cal-style ammo can with a custom plaque on the side. Choose red dot reticle designs or bullseye targets; every coaster is cork backed.",
+    specs: ["PETG", "4 coasters + can", "Reticle or bullseye", "Cork backed"],
+    price: "20.00 \u2013 30.00",
+    image: "photos/4590386871.jpg",
+    etsy: "https://www.etsy.com/listing/4590386871"
+  },
+  {
+    name: "Personalized Coaster Holder",
+    blurb: "A round coaster caddy with a two-line name plate across the front \u2014 name, rank, badge number or unit. Four coasters in your choice of reticle, bullseye or thin blue line, or order the holder on its own.",
+    specs: ["PETG", "4 coasters + caddy", "Cork backed", "2-line name plate"],
+    price: "20.00 \u2013 30.00",
+    image: "photos/4590216800.jpg",
+    etsy: "https://www.etsy.com/listing/4590216800"
+  }
+];
+
+const MARK = '<svg viewBox="-18 -18 36 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle r="11.5" fill="none" stroke="#d32f2f" stroke-width="1.725"/><g stroke="#d32f2f" stroke-width="1.5"><line x1="13.3" y1="0" x2="16.8" y2="0"/><line x1="-13.3" y1="0" x2="-16.8" y2="0"/><line x1="0" y1="-13.3" x2="0" y2="-16.8"/><line x1="0" y1="13.3" x2="0" y2="16.8"/></g><polygon points="0,-7.13 4.6,1.15 1.96,1.15 1.96,6.9 -1.96,6.9 -1.96,1.15 -4.6,1.15" fill="#f5f5f5"/><polygon points="0,-3.45 1.73,0.46 -1.73,0.46" fill="#d32f2f"/></svg>';
+
+function renderShop() {
+  const section = document.getElementById('shop');
+  const grid = document.getElementById('shop-grid');
+  const note = document.getElementById('shop-note');
+  if (!grid || !section) return;
+
+  /* Nothing listed yet - keep the section out of the page entirely. */
+  if (!PRODUCTS.length) {
+    section.remove();
+    const link = document.querySelector('.nav-links a[href="#shop"]');
+    if (link && link.parentElement) link.parentElement.remove();
+    return;
+  }
+
+  if (note) note.textContent = SHOP_NOTE;
+
+  grid.innerHTML = PRODUCTS.map(function (p) {
+    const photo = p.image
+      ? '<img src="' + p.image + '" alt="' + p.name + '" loading="lazy">'
+      : MARK;
+    const specs = (p.specs || []).map(function (s) { return '<li>' + s + '</li>'; }).join('');
+    const price = p.price
+      ? '<div class="price">$' + p.price + '</div>'
+      : '<div class="price">Ask<small>pricing on request</small></div>';
+    const button = p.etsy
+      ? '<a class="buy" href="' + p.etsy + '" target="_blank" rel="noopener">View on Etsy</a>'
+      : '<a class="buy secondary" href="#contact">Request</a>';
+    return '<article class="shop-card">' +
+             '<div class="shop-photo">' + photo + '</div>' +
+             '<div class="shop-body">' +
+               '<h3>' + p.name + '</h3>' +
+               '<p>' + p.blurb + '</p>' +
+               '<ul class="shop-specs">' + specs + '</ul>' +
+               '<div class="shop-foot">' + price + button + '</div>' +
+             '</div>' +
+           '</article>';
+  }).join('');
+}
+
+renderShop();
+
+const CONTACT_EMAIL = 'fahedsalamehlz@gmail.com';
+
+function handleSubmit(e) {
+  e.preventDefault();
+  const form = e.target;
+  const name = (form.querySelector('input[type="text"]').value || '').trim();
+  const email = (form.querySelector('input[type="email"]').value || '').trim();
+  const message = (form.querySelector('textarea').value || '').trim();
+
+  const subject = 'Primal Prints inquiry' + (name ? ' from ' + name : '');
+  const body = 'Name: ' + name + '\nEmail: ' + email + '\n\n' + message;
+  window.location.href = 'mailto:' + CONTACT_EMAIL +
+    '?subject=' + encodeURIComponent(subject) +
+    '&body=' + encodeURIComponent(body);
+
+  const btn = form.querySelector('button');
+  const originalText = btn.textContent;
+  btn.textContent = 'Opening your email app...';
+  btn.disabled = true;
+  setTimeout(() => {
+    btn.textContent = originalText;
+    btn.disabled = false;
+  }, 3000);
+}
+</script>
+
+</body>
+</html>
