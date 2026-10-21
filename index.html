@@ -440,16 +440,6 @@ footer {
   color: #707070;
 }
 
-.alt-link {
-  color: #8a8a8a;
-  text-decoration: none;
-  border-bottom: 1px solid #333;
-}
-
-.alt-link:hover {
-  color: #d32f2f;
-  border-bottom-color: #d32f2f;
-}
 
 .buy {
   background: #d32f2f;
@@ -687,9 +677,9 @@ footer {
    SHOP - edit PRODUCTS to add, remove, or reprice items.
    image: photo path in this repo, e.g. "photos/4592922499.jpg" ("" = placeholder)
    price: number or range, no dollar sign ("" = shows "Ask")
-   etsy:  the Etsy listing URL ("" = button points at the contact form instead)
+   stripe: Stripe Payment Link URL ("" = button points at the contact form instead)
 ------------------------------------------------------------------- */
-const SHOP_NOTE = "Every piece is printed to order in Arizona. Checkout, personalization and shipping are handled through our Etsy shop \u2014 prices shown are the current Etsy prices.";
+const SHOP_NOTE = "Every piece is printed to order in Arizona. Items marked Buy Now check out here; for anything else, send a request and we will get back to you within 24\u201348 hours.";
 
 const PRODUCTS = [
   {
@@ -697,8 +687,7 @@ const PRODUCTS = [
     blurb: "Two-color badge ornament with raised lettering \u2014 name, badge number and year. Shield or 7-point star, eight badge colors, and a carabiner clip included so it hangs on a tree, a duty bag or a mirror.",
     specs: ["Shield or star", "8 colors", "Clip included", "Free shipping"],
     price: "14.99",
-    images: ["photos/4592922499.jpg"],
-    etsy: "https://www.etsy.com/listing/4592922499"
+    images: ["photos/4592922499.jpg"]
   },
   {
     name: "AR Mag Stocking Holder",
@@ -706,90 +695,74 @@ const PRODUCTS = [
     specs: ["8.5 in tall", "6 mag colors", "Custom name plate", "Weighted base"],
     price: "34.99",
     images: ["photos/4595346045.jpg"],
-    stripe: "https://buy.stripe.com/test_6oUeVc6aQaTi6jkcoQ7IY00",
-    etsy: "https://www.etsy.com/listing/4595346045"
+    stripe: "https://buy.stripe.com/test_6oUeVc6aQaTi6jkcoQ7IY00"
   },
   {
     name: "Body Camera Charging Dock",
     blurb: "A desk cradle for the Axon Body 4 \u2014 drop the camera in and it seats straight onto the charger, no fumbling with cables at the end of a shift. Uses the USB-C cable you already have.",
     specs: ["Axon Body 4", "USB-C cable not included", "Desk or interview room"],
     price: "24.99",
-    images: ["photos/4600268026.jpg", "photos/4600268026-2.jpg", "photos/4600268026-3.jpg"],
-    etsy: "https://www.etsy.com/listing/4600268026"
+    images: ["photos/4600268026.jpg", "photos/4600268026-2.jpg", "photos/4600268026-3.jpg"]
   },
   {
     name: "5.56 Ammo Can Organizer System",
     blurb: "Snap trays and vertical inserts that share one footprint, so they stack and mix inside a steel 50 cal M2A1 can \u2014 up to 732 rounds. Each round sits in a contoured trough and clicks into two flexible posts; turn a tray over and nothing falls out.",
     specs: ["M2A1 50 cal can", "Up to 732 rds", "Trays, inserts, caps", "Ammo not included"],
     price: "22.99 \u2013 79.99",
-    images: ["photos/4591281149.jpg", "photos/4591281149-2.jpg", "photos/4591281149-3.jpg"],
-    etsy: "https://www.etsy.com/listing/4591281149"
+    images: ["photos/4591281149.jpg", "photos/4591281149-2.jpg", "photos/4591281149-3.jpg"]
   },
   {
     name: "9mm Ammo Box, 50 Round",
     blurb: "Fifty rounds standing upright in tapered pockets that grip the case head, so nothing rattles or spills in a range bag. Pin hinge, no screws, and a snap bead running the full front and halfway down both sides.",
     specs: ["PETG or ASA", "50 or 25 round", "Pin hinge", "Custom colors"],
     price: "15.00 \u2013 23.00",
-    images: ["photos/4592086667.jpg", "photos/4592086667-2.jpg", "photos/4592086667-3.jpg", "photos/4592086667-4.jpg", "photos/4592086667-5.jpg", "photos/4592086667-6.jpg"],
-    etsy: "https://www.etsy.com/listing/4592086667"
+    images: ["photos/4592086667.jpg", "photos/4592086667-2.jpg", "photos/4592086667-3.jpg", "photos/4592086667-4.jpg", "photos/4592086667-5.jpg", "photos/4592086667-6.jpg"]
   },
   {
     name: "Rigid MOLLE Seat Back Panel Kit",
     blurb: "Four grid tiles that assemble into an 18 x 16 inch seat-back panel \u2014 12 columns by 8 rows of true PALS space on a hard surface that will not sag under loaded pouches. Grid spacing runs continuous across the seams.",
     specs: ["4-pack", "18 x 16 in", "True PALS spacing", "M3 bolt grid"],
     price: "49.99",
-    images: ["photos/4574884079.jpg"],
-    etsy: "https://www.etsy.com/listing/4574884079"
+    images: ["photos/4574884079.jpg"]
   },
   {
     name: "Rigid MOLLE Grid Tile",
     blurb: "A single tile that turns a seat back, wall or workbench into a modular attachment point. Real PALS spacing so pouches you already own thread on straight, plus a row of M3 bolt holes on every vertical bar for hard-mounting.",
     specs: ["Single tile", "True PALS spacing", "M3 bolt grid", "Made in USA"],
     price: "18.99",
-    images: ["photos/4574901372.jpg"],
-    etsy: "https://www.etsy.com/listing/4574901372"
+    images: ["photos/4574901372.jpg"]
   },
   {
     name: "Tactical Pistol Business Card Holder",
     blurb: "The pistol sits inverted on its stand and cards feed up through a slot cut clean through the frame \u2014 the card comes out of the gun, not a tray behind it. Slide serrations, ejection port, accessory rail, bored-out muzzle.",
     specs: ["6 in or 8 in", "Two-color name inlay", "Badge number option"],
     price: "15.00 \u2013 25.00",
-    images: ["photos/4572398753.jpg"],
-    etsy: "https://www.etsy.com/listing/4572398753"
+    images: ["photos/4572398753.jpg"]
   },
   {
     name: "IPSC Target Coaster Set",
     blurb: "Four silhouette coasters with A, C and D scoring zones, stacked in a matching target-shaped caddy with your name on the front plate. Printed in PETG, so hot mugs and sweating glasses are not a problem.",
     specs: ["PETG", "4 coasters + caddy", "Cork backed", "2-line name plate"],
     price: "23.00 \u2013 33.00",
-    images: ["photos/4590410110.jpg", "photos/4590410110-2.jpg", "photos/4590410110-3.jpg", "photos/4590410110-4.jpg"],
-    etsy: "https://www.etsy.com/listing/4590410110"
+    images: ["photos/4590410110.jpg", "photos/4590410110-2.jpg", "photos/4590410110-3.jpg", "photos/4590410110-4.jpg"]
   },
   {
     name: "Ammo Can Coaster Set",
     blurb: "A coaster set that lives in its own .30 cal-style ammo can with a custom plaque on the side. Choose red dot reticle designs or bullseye targets; every coaster is cork backed.",
     specs: ["PETG", "4 coasters + can", "Reticle or bullseye", "Cork backed"],
     price: "20.00 \u2013 30.00",
-    images: ["photos/4590386871.jpg", "photos/4590386871-2.jpg", "photos/4590386871-3.jpg", "photos/4590386871-4.jpg", "photos/4590386871-5.jpg", "photos/4590386871-6.jpg"],
-    etsy: "https://www.etsy.com/listing/4590386871"
+    images: ["photos/4590386871.jpg", "photos/4590386871-2.jpg", "photos/4590386871-3.jpg", "photos/4590386871-4.jpg", "photos/4590386871-5.jpg", "photos/4590386871-6.jpg"]
   },
   {
     name: "Personalized Coaster Holder",
     blurb: "A round coaster caddy with a two-line name plate across the front \u2014 name, rank, badge number or unit. Four coasters in your choice of reticle, bullseye or thin blue line, or order the holder on its own.",
     specs: ["PETG", "4 coasters + caddy", "Cork backed", "2-line name plate"],
     price: "20.00 \u2013 30.00",
-    images: ["photos/4590216800.jpg", "photos/4590216800-2.jpg", "photos/4590216800-3.jpg", "photos/4590216800-4.jpg", "photos/4590216800-5.jpg", "photos/4590216800-6.jpg"],
-    etsy: "https://www.etsy.com/listing/4590216800"
+    images: ["photos/4590216800.jpg", "photos/4590216800-2.jpg", "photos/4590216800-3.jpg", "photos/4590216800-4.jpg", "photos/4590216800-5.jpg", "photos/4590216800-6.jpg"]
   }
 ];
 
 const MARK = '<svg viewBox="-18 -18 36 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle r="11.5" fill="none" stroke="#d32f2f" stroke-width="1.725"/><g stroke="#d32f2f" stroke-width="1.5"><line x1="13.3" y1="0" x2="16.8" y2="0"/><line x1="-13.3" y1="0" x2="-16.8" y2="0"/><line x1="0" y1="-13.3" x2="0" y2="-16.8"/><line x1="0" y1="13.3" x2="0" y2="16.8"/></g><polygon points="0,-7.13 4.6,1.15 1.96,1.15 1.96,6.9 -1.96,6.9 -1.96,1.15 -4.6,1.15" fill="#f5f5f5"/><polygon points="0,-3.45 1.73,0.46 -1.73,0.46" fill="#d32f2f"/></svg>';
-
-function altLinkSlot(p) {
-  return (p.stripe && p.etsy)
-    ? '<small><a class="alt-link" href="' + p.etsy + '" target="_blank" rel="noopener">also on Etsy</a></small>'
-    : '';
-}
 
 function renderShop() {
   const section = document.getElementById('shop');
@@ -821,15 +794,13 @@ function renderShop() {
       : '';
     const specs = (p.specs || []).map(function (s) { return '<li>' + s + '</li>'; }).join('');
     const price = p.price
-      ? '<div class="price">$' + p.price + altLinkSlot(p) + '</div>'
+      ? '<div class="price">$' + p.price + '</div>'
       : '<div class="price">Ask<small>pricing on request</small></div>';
-    /* A Stripe Payment Link takes over as the primary button when present;
-       Etsy drops to a secondary line under the price. */
+    /* Stripe Payment Link where one exists; everything else routes to the
+       contact form until its link is created. */
     const button = p.stripe
       ? '<a class="buy" href="' + p.stripe + '" target="_blank" rel="noopener">Buy Now</a>'
-      : p.etsy
-        ? '<a class="buy" href="' + p.etsy + '" target="_blank" rel="noopener">View on Etsy</a>'
-        : '<a class="buy secondary" href="#contact">Request</a>';
+      : '<a class="buy secondary" href="#contact">Request to Order</a>';
 
     return '<article class="shop-card">' +
              '<div class="shop-photo">' + photo + '</div>' +
