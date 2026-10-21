@@ -374,6 +374,48 @@ footer {
   padding: 3px 8px;
 }
 
+.shop-thumbs {
+  display: flex;
+  gap: 6px;
+  padding: 10px 10px 0;
+  flex-wrap: wrap;
+}
+
+.shop-thumb {
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: 1px solid #2f2f2f;
+  border-radius: 2px;
+  background: #131313;
+  cursor: pointer;
+  overflow: hidden;
+  transition: border-color 0.15s, opacity 0.15s;
+  opacity: 0.65;
+}
+
+.shop-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.shop-thumb:hover {
+  opacity: 1;
+  border-color: #666;
+}
+
+.shop-thumb.is-active {
+  opacity: 1;
+  border-color: #d32f2f;
+}
+
+.shop-thumb:focus-visible {
+  outline: 2px solid #d32f2f;
+  outline-offset: 2px;
+}
+
 .shop-foot {
   display: flex;
   align-items: center;
@@ -467,6 +509,16 @@ footer {
 
   .logo span {
     white-space: nowrap;
+  }
+
+  nav {
+    flex-wrap: wrap;
+    row-gap: 10px;
+  }
+
+  .nav-links {
+    width: 100%;
+    justify-content: space-between;
   }
 
   header {
@@ -634,7 +686,7 @@ const PRODUCTS = [
     blurb: "Two-color badge ornament with raised lettering \u2014 name, badge number and year. Shield or 7-point star, eight badge colors, and a carabiner clip included so it hangs on a tree, a duty bag or a mirror.",
     specs: ["Shield or star", "8 colors", "Clip included", "Free shipping"],
     price: "14.99",
-    image: "photos/4592922499.jpg",
+    images: ["photos/4592922499.jpg"],
     etsy: "https://www.etsy.com/listing/4592922499"
   },
   {
@@ -642,7 +694,7 @@ const PRODUCTS = [
     blurb: "A polymer-style rifle magazine on a weighted base with your name across the front plate. Holds a stocking up to about four pounds, with mounting holes if you would rather screw it down. Decorative display piece, not a functional magazine.",
     specs: ["8.5 in tall", "6 mag colors", "Custom name plate", "Weighted base"],
     price: "34.99",
-    image: "photos/4595346045.jpg",
+    images: ["photos/4595346045.jpg"],
     etsy: "https://www.etsy.com/listing/4595346045"
   },
   {
@@ -650,7 +702,7 @@ const PRODUCTS = [
     blurb: "Snap trays and vertical inserts that share one footprint, so they stack and mix inside a steel 50 cal M2A1 can \u2014 up to 732 rounds. Each round sits in a contoured trough and clicks into two flexible posts; turn a tray over and nothing falls out.",
     specs: ["M2A1 50 cal can", "Up to 732 rds", "Trays, inserts, caps", "Ammo not included"],
     price: "22.99 \u2013 79.99",
-    image: "photos/4591281149.jpg",
+    images: ["photos/4591281149.jpg", "photos/4591281149-2.jpg", "photos/4591281149-3.jpg"],
     etsy: "https://www.etsy.com/listing/4591281149"
   },
   {
@@ -658,7 +710,7 @@ const PRODUCTS = [
     blurb: "Fifty rounds standing upright in tapered pockets that grip the case head, so nothing rattles or spills in a range bag. Pin hinge, no screws, and a snap bead running the full front and halfway down both sides.",
     specs: ["PETG or ASA", "50 or 25 round", "Pin hinge", "Custom colors"],
     price: "15.00 \u2013 23.00",
-    image: "photos/4592086667.jpg",
+    images: ["photos/4592086667.jpg", "photos/4592086667-2.jpg", "photos/4592086667-3.jpg", "photos/4592086667-4.jpg", "photos/4592086667-5.jpg", "photos/4592086667-6.jpg"],
     etsy: "https://www.etsy.com/listing/4592086667"
   },
   {
@@ -666,7 +718,7 @@ const PRODUCTS = [
     blurb: "Four grid tiles that assemble into an 18 x 16 inch seat-back panel \u2014 12 columns by 8 rows of true PALS space on a hard surface that will not sag under loaded pouches. Grid spacing runs continuous across the seams.",
     specs: ["4-pack", "18 x 16 in", "True PALS spacing", "M3 bolt grid"],
     price: "49.99",
-    image: "photos/4574884079.jpg",
+    images: ["photos/4574884079.jpg"],
     etsy: "https://www.etsy.com/listing/4574884079"
   },
   {
@@ -674,7 +726,7 @@ const PRODUCTS = [
     blurb: "A single tile that turns a seat back, wall or workbench into a modular attachment point. Real PALS spacing so pouches you already own thread on straight, plus a row of M3 bolt holes on every vertical bar for hard-mounting.",
     specs: ["Single tile", "True PALS spacing", "M3 bolt grid", "Made in USA"],
     price: "18.99",
-    image: "photos/4574901372.jpg",
+    images: ["photos/4574901372.jpg"],
     etsy: "https://www.etsy.com/listing/4574901372"
   },
   {
@@ -682,7 +734,7 @@ const PRODUCTS = [
     blurb: "The pistol sits inverted on its stand and cards feed up through a slot cut clean through the frame \u2014 the card comes out of the gun, not a tray behind it. Slide serrations, ejection port, accessory rail, bored-out muzzle.",
     specs: ["6 in or 8 in", "Two-color name inlay", "Badge number option"],
     price: "15.00 \u2013 25.00",
-    image: "photos/4572398753.jpg",
+    images: ["photos/4572398753.jpg"],
     etsy: "https://www.etsy.com/listing/4572398753"
   },
   {
@@ -690,7 +742,7 @@ const PRODUCTS = [
     blurb: "Four silhouette coasters with A, C and D scoring zones, stacked in a matching target-shaped caddy with your name on the front plate. Printed in PETG, so hot mugs and sweating glasses are not a problem.",
     specs: ["PETG", "4 coasters + caddy", "Cork backed", "2-line name plate"],
     price: "23.00 \u2013 33.00",
-    image: "photos/4590410110.jpg",
+    images: ["photos/4590410110.jpg", "photos/4590410110-2.jpg", "photos/4590410110-3.jpg", "photos/4590410110-4.jpg"],
     etsy: "https://www.etsy.com/listing/4590410110"
   },
   {
@@ -698,7 +750,7 @@ const PRODUCTS = [
     blurb: "A coaster set that lives in its own .30 cal-style ammo can with a custom plaque on the side. Choose red dot reticle designs or bullseye targets; every coaster is cork backed.",
     specs: ["PETG", "4 coasters + can", "Reticle or bullseye", "Cork backed"],
     price: "20.00 \u2013 30.00",
-    image: "photos/4590386871.jpg",
+    images: ["photos/4590386871.jpg", "photos/4590386871-2.jpg", "photos/4590386871-3.jpg", "photos/4590386871-4.jpg", "photos/4590386871-5.jpg", "photos/4590386871-6.jpg"],
     etsy: "https://www.etsy.com/listing/4590386871"
   },
   {
@@ -706,7 +758,7 @@ const PRODUCTS = [
     blurb: "A round coaster caddy with a two-line name plate across the front \u2014 name, rank, badge number or unit. Four coasters in your choice of reticle, bullseye or thin blue line, or order the holder on its own.",
     specs: ["PETG", "4 coasters + caddy", "Cork backed", "2-line name plate"],
     price: "20.00 \u2013 30.00",
-    image: "photos/4590216800.jpg",
+    images: ["photos/4590216800.jpg", "photos/4590216800-2.jpg", "photos/4590216800-3.jpg", "photos/4590216800-4.jpg", "photos/4590216800-5.jpg", "photos/4590216800-6.jpg"],
     etsy: "https://www.etsy.com/listing/4590216800"
   }
 ];
@@ -730,9 +782,17 @@ function renderShop() {
   if (note) note.textContent = SHOP_NOTE;
 
   grid.innerHTML = PRODUCTS.map(function (p) {
-    const photo = p.image
-      ? '<img src="' + p.image + '" alt="' + p.name + '" loading="lazy">'
+    const imgs = p.images || (p.image ? [p.image] : []);
+    const photo = imgs.length
+      ? '<img src="' + imgs[0] + '" alt="' + p.name + '" loading="lazy">'
       : MARK;
+    const thumbs = imgs.length > 1
+      ? '<div class="shop-thumbs">' + imgs.map(function (src, n) {
+          return '<button type="button" class="shop-thumb' + (n === 0 ? ' is-active' : '') +
+                 '" data-src="' + src + '" aria-label="' + p.name + ', photo ' + (n + 1) + '">' +
+                 '<img src="' + src + '" alt="" loading="lazy"></button>';
+        }).join('') + '</div>'
+      : '';
     const specs = (p.specs || []).map(function (s) { return '<li>' + s + '</li>'; }).join('');
     const price = p.price
       ? '<div class="price">$' + p.price + '</div>'
@@ -742,6 +802,7 @@ function renderShop() {
       : '<a class="buy secondary" href="#contact">Request</a>';
     return '<article class="shop-card">' +
              '<div class="shop-photo">' + photo + '</div>' +
+             thumbs +
              '<div class="shop-body">' +
                '<h3>' + p.name + '</h3>' +
                '<p>' + p.blurb + '</p>' +
@@ -753,6 +814,18 @@ function renderShop() {
 }
 
 renderShop();
+
+/* Thumbnail click swaps the card's main photo. */
+document.addEventListener('click', function (e) {
+  const thumb = e.target.closest ? e.target.closest('.shop-thumb') : null;
+  if (!thumb) return;
+  const card = thumb.closest('.shop-card');
+  const main = card.querySelector('.shop-photo img');
+  if (!main) return;
+  main.src = thumb.getAttribute('data-src');
+  card.querySelectorAll('.shop-thumb').forEach(function (t) { t.classList.remove('is-active'); });
+  thumb.classList.add('is-active');
+});
 
 const CONTACT_EMAIL = 'fahedsalamehlz@gmail.com';
 
