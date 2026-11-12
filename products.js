@@ -325,23 +325,4 @@ const PRODUCTS = [
    FROM THE BENCH — new ideas, prototypes and things coming soon.
    status: "Prototype", "Testing", "Coming soon" (anything you like)
    ===================================================================== */
-const IDEAS = [
-  {
-    name: "Safe Organizer Expansion Tile",
-    status: "Testing",
-    blurb: "A half-width tile that locks onto the side of your organizer, so you can grow the panel as you add gear.",
-    image: "photos/bench-expansion-tile.jpg"
-  },
-  {
-    name: "Motion Light Pod",
-    status: "Testing",
-    blurb: "A clip-on mount for a rechargeable motion-sensor puck light — the safe lights up the moment you open the door.",
-    image: "photos/bench-light-pod.jpg"
-  },
-  {
-    name: "License Plate Frames",
-    status: "Coming soon",
-    blurb: "Printed plate frames with funny sayings, or your own.",
-    image: ""
-  }
-];
+const IDEAS = [];

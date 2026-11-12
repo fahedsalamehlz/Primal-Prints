@@ -90,6 +90,7 @@ function renderGrid() {
 }
 
 function renderBench() {
+  if (!$("#bench-grid")) return;
   $("#bench-grid").innerHTML = IDEAS.map((idea, i) => `<article class="idea">
       <div class="ph">${idea.image ? `<img src="${esc(idea.image)}" alt="${esc(idea.name)}" loading="lazy">` : '<svg><use href="#mark"/></svg>'}
         <span class="st">${esc(idea.status)}</span></div>
