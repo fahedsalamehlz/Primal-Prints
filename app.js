@@ -110,7 +110,7 @@ function openProduct(id) {
   setPhoto(0);
   $("#m-thumbs").innerHTML = p.images.length > 1 ? p.images.map((src, i) =>
     `<button type="button" data-photo="${i}" aria-current="${i === 0}"><img src="${esc(src)}" alt="" loading="lazy"></button>`).join("") : "";
-  $("#m-options").innerHTML = (p.options || []).map((o, i) => `<label>${esc(o.label)} <em class="req">*</em>
+  $("#m-options").innerHTML = (p.options || []).map((o, i) => `<label><span>${esc(o.label)} <em class="req">*</em></span>
       <select data-opt="${i}" required><option value="" selected disabled>Select ${esc(o.label.toLowerCase())}…</option>${o.choices.map((c, k) => `<option value="${k}">${esc(c.name)}${"price" in c ? " — " + money(c.price) : ""}${"add" in c ? " (+" + money(c.add) + ")" : ""}</option>`).join("")}</select>
     </label>`).join("");
   $("#m-notes-wrap").hidden = !p.notes;
