@@ -110,13 +110,14 @@ function openProduct(id) {
   setPhoto(0);
   $("#m-thumbs").innerHTML = p.images.length > 1 ? p.images.map((src, i) =>
     `<button type="button" data-photo="${i}" aria-current="${i === 0}"><img src="${esc(src)}" alt="" loading="lazy"></button>`).join("") : "";
-  $("#m-options").innerHTML = (p.options || []).map((o, i) => `<label>${esc(o.label)}
-      <select data-opt="${i}">${o.choices.map((c, k) => `<option value="${k}">${esc(c.name)}${"price" in c ? " — " + money(c.price) : ""}${"add" in c ? " (+" + money(c.add) + ")" : ""}</option>`).join("")}</select>
+  $("#m-options").innerHTML = (p.options || []).map((o, i) => `<label>${esc(o.label)} <em class="req">*</em>
+      <select data-opt="${i}" required><option value="" selected disabled>Select ${esc(o.label.toLowerCase())}…</option>${o.choices.map((c, k) => `<option value="${k}">${esc(c.name)}${"price" in c ? " — " + money(c.price) : ""}${"add" in c ? " (+" + money(c.add) + ")" : ""}</option>`).join("")}</select>
     </label>`).join("");
   $("#m-notes-wrap").hidden = !p.notes;
   $("#m-notes").value = "";
   $("#m-notes").placeholder = p.notesHint || "";
-  $("#m-notes-label").textContent = p.notesHint ? "Personalization / notes" : "Notes";
+  $("#m-error").hidden = true;
+  updateNotesLabel();
   $("#m-qty").value = 1;
   $("#m-ship").textContent = p.ship === 0 ? "Free shipping" : "+ " + money(p.ship) + " shipping";
   updateModalPrice();
@@ -126,8 +127,35 @@ function setPhoto(i) {
   $("#m-img").src = current.images[i]; $("#m-img").alt = current.name;
   document.querySelectorAll("#m-thumbs button").forEach((b, k) => b.setAttribute("aria-current", k === i));
 }
-const picksNow = () => [...document.querySelectorAll("#m-options select")].map(s => +s.value);
-function updateModalPrice() { $("#m-price").textContent = money(priceFor(current, picksNow())); }
+/* -1 = not chosen yet */
+const picksNow = () => [...document.querySelectorAll("#m-options select")].map(s => s.value === "" ? -1 : +s.value);
+/* notes are required when the product says so, or when a chosen option needs them */
+function notesRequired(p, picks) {
+  if (!p.notes) return false;
+  if (p.notesRequired) return true;
+  return (p.options || []).some((o, i) => picks[i] >= 0 && o.choices[picks[i]].requiresNotes);
+}
+function updateNotesLabel() {
+  const req = notesRequired(current, picksNow());
+  $("#m-notes-label").innerHTML = (current.notesHint ? "Personalization / notes" : "Notes") + (req ? ' <em class="req">* required</em>' : " (optional)");
+}
+function updateModalPrice() {
+  const picks = picksNow();
+  const done = picks.every(n => n >= 0);
+  $("#m-price").textContent = done ? money(priceFor(current, picks)) : (hasRange(current) ? "from " : "") + money(lowPrice(current));
+  updateNotesLabel();
+}
+function missingFields() {
+  const missing = [];
+  document.querySelectorAll("#m-options select").forEach((s, i) => {
+    const bad = s.value === ""; s.classList.toggle("invalid", bad);
+    if (bad) missing.push(current.options[i].label);
+  });
+  const needNotes = notesRequired(current, picksNow()) && !clean($("#m-notes").value, 100);
+  $("#m-notes").classList.toggle("invalid", needNotes);
+  if (needNotes) missing.push((current.notesHint || "personalization").replace(/\.$/, ""));
+  return missing;
+}
 
 /* ---------- cart (stored in this browser only; prices are re-read from the catalog) ---------- */
 function loadCart() {
@@ -155,6 +183,14 @@ function totals() {
 }
 
 function addToCart() {
+  const missing = missingFields();
+  if (missing.length) {
+    $("#m-error").textContent = "Please choose: " + missing.join(", ");
+    $("#m-error").hidden = false;
+    const first = document.querySelector("#m-form .invalid"); if (first) first.focus();
+    return;
+  }
+  $("#m-error").hidden = true;
   const picks = picksNow();
   const notes = clean($("#m-notes").value, 100);
   const qty = Math.min(20, Math.max(1, parseInt($("#m-qty").value, 10) || 1));
@@ -285,7 +321,8 @@ document.addEventListener("click", (e) => {
   if (e.target.classList.contains("overlay")) hide("#" + e.target.id);
 });
 document.addEventListener("keydown", (e) => { if (e.key === "Escape") { if (!$("#modal").hidden) hide("#modal"); else if (!$("#cart").hidden) hide("#cart"); } });
-$("#m-options").addEventListener("change", updateModalPrice);
+$("#m-options").addEventListener("change", (e) => { e.target.classList.remove("invalid"); updateModalPrice(); });
+$("#m-notes").addEventListener("input", (e) => e.target.classList.remove("invalid"));
 $("#m-form").addEventListener("submit", (e) => { e.preventDefault(); addToCart(); });
 $("#cart-open").addEventListener("click", openCart);
 $("#email-order").addEventListener("click", emailOrder);

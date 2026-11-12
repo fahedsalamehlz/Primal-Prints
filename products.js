@@ -16,6 +16,9 @@
                an "add" (added to the price).
      notes     true = show a "Name / personalization" box
      notesHint what to type in that box
+     notesRequired true = the box must be filled before Add to cart
+     (a single choice can also have requiresNotes: true, e.g. "Build Your Own")
+   Every option must be picked before an item can go in the cart.
      featured  true = shows in the Featured row at the top
 
    Ideas on the bench (prototypes / coming soon) are in IDEAS at the bottom.
@@ -47,11 +50,11 @@ const PRODUCTS = [
     options: [
       { label: "Set", choices: [
         { name: "Full Set (as shown)" },
-        { name: "Build Your Own Set — any 4 holders (list them in the notes)" } ] },
+        { name: "Build Your Own Set — any 4 holders (list them in the notes)", requiresNotes: true } ] },
       { label: "Tile backing", choices: [ { name: "Magnetic (steel doors)" }, { name: "Velcro (felt-lined safes)" } ] },
       { label: "Tile color", choices: [ { name: "Black" }, { name: "Gray" } ] }
     ],
-    notes: true, notesHint: "Building your own? List your 4 holders here."
+    notes: true, notesHint: "List your 4 holders (Build Your Own only)."
   },
   {
     id: "safe-tile", cat: "safe",
@@ -117,9 +120,9 @@ const PRODUCTS = [
       { label: "Size", choices: [ { name: "50 Round", price: 19.99 }, { name: "25 Round", price: 14.99 } ] },
       { label: "Colors", choices: [
         { name: "All one color" },
-        { name: "Custom lid color", add: 1 },
-        { name: "Custom lid and base", add: 2 },
-        { name: "Lid, base and text", add: 3 } ] }
+        { name: "Custom lid color", add: 1, requiresNotes: true },
+        { name: "Custom lid and base", add: 2, requiresNotes: true },
+        { name: "Lid, base and text", add: 3, requiresNotes: true } ] }
     ],
     notes: true, notesHint: "Which colors? (e.g. black base, red lid)"
   },
@@ -140,7 +143,7 @@ const PRODUCTS = [
     specs: ["Holds 7 coins", "Custom name"],
     price: 16.99, ship: 7.99,
     images: ["f5f127/8818935265_c9ih", "a1cd40/8771117912_iodh", "f5c8da/8818935271_mgjk"].map(img),
-    notes: true, notesHint: "Name for the front plate"
+    notes: true, notesRequired: true, notesHint: "Name for the front plate"
   },
   {
     id: "bodycam-dock", cat: "duty",
@@ -199,7 +202,7 @@ const PRODUCTS = [
     specs: ["Mantel decor", "Engraved base option", "Free shipping"],
     price: 43.99, ship: 0,
     images: ["e9079e/8783706909_552v", "94c289/8735879398_a2ih", "e138f0/8783706879_ewrc", "748938/8735879402_qrla"].map(img),
-    options: [ { label: "Base", choices: [ { name: "No engraving", price: 43.99 }, { name: "Custom engraved base", price: 55.99 } ] } ],
+    options: [ { label: "Base", choices: [ { name: "No engraving", price: 43.99 }, { name: "Custom engraved base", price: 55.99, requiresNotes: true } ] } ],
     notes: true, notesHint: "Engraving text (if you chose the engraved base)"
   },
   {
@@ -210,7 +213,7 @@ const PRODUCTS = [
     price: 34.99, ship: 14.99,
     images: ["7688bc/8725200223_gt0q", "7b625e/8677379834_zzvr", "ea88e1/8725201439_e0mu", "d3d4de/8677379814_jogd"].map(img),
     options: [ { label: "Mag color", choices: ["Black", "OD Green", "Green", "Red", "Orange", "Yellow"].map(n => ({ name: n })) } ],
-    notes: true, notesHint: "Name for the plate"
+    notes: true, notesRequired: true, notesHint: "Name for the plate"
   },
   {
     id: "badge-ornament", cat: "christmas",
@@ -223,7 +226,7 @@ const PRODUCTS = [
       { label: "Color", choices: ["Black", "Blue", "Red", "Green", "White", "Pink", "Yellow", "Orange"].map(n => ({ name: n })) },
       { label: "Shape", choices: [ { name: "Shield" }, { name: "7-Point Star" } ] }
     ],
-    notes: true, notesHint: "Name, badge number and year"
+    notes: true, notesRequired: true, notesHint: "Name, badge number and year"
   },
   {
     id: "gift-card-can", cat: "christmas",
@@ -236,7 +239,7 @@ const PRODUCTS = [
       { label: "Number of cans", choices: [
         { name: "1 can", price: 11.99 }, { name: "2 cans", price: 22.99 }, { name: "3 cans", price: 32.99 },
         { name: "4 cans", price: 42.99 }, { name: "5 cans", price: 51.99 }, { name: "6 cans", price: 59.99 } ] },
-      { label: "Saying", choices: ["Merry Christmas", "Happy Holidays", "Season's Greetings", "Ho Ho Ho", "Naughty or Nice?", "Happy New Year", "Mix & Match (list in notes)"].map(n => ({ name: n })) }
+      { label: "Saying", choices: ["Merry Christmas", "Happy Holidays", "Season's Greetings", "Ho Ho Ho", "Naughty or Nice?", "Happy New Year", "Mix & Match (list in notes)"].map(n => ({ name: n, requiresNotes: /Mix/.test(n) })) }
     ],
     notes: true, notesHint: "Mixing sayings? List them here."
   },
@@ -250,7 +253,7 @@ const PRODUCTS = [
     price: 27.99, ship: 7.99,
     images: ["8919ad/8756722973_mqt1", "19c5f4/8756722971_5web", "023bc8/8756722975_75ln", "2a4267/8708906496_6vzl"].map(img),
     options: [ { label: "Set", choices: [ { name: "Caddy + 4 coasters", price: 27.99 }, { name: "Caddy only", price: 18.99 } ] } ],
-    notes: true, notesHint: "Name for the plate (2 lines max)"
+    notes: true, notesRequired: true, notesHint: "Name for the plate (2 lines max)"
   },
   {
     id: "ammo-coasters", cat: "desk",
@@ -260,7 +263,7 @@ const PRODUCTS = [
     price: 24.99, ship: 7.99,
     images: ["cf2f6a/8650359806_1v6t", "9b660e/8650359804_jltn", "ef16ef/8698187301_9act", "aacc9d/8650359808_etpz"].map(img),
     options: [ { label: "Set", choices: [ { name: "Can + 4 coasters", price: 24.99 }, { name: "Can only", price: 16.99 } ] } ],
-    notes: true, notesHint: "Plaque text + reticle or bullseye"
+    notes: true, notesRequired: true, notesHint: "Plaque text + reticle or bullseye"
   },
   {
     id: "name-coasters", cat: "desk",
@@ -270,7 +273,7 @@ const PRODUCTS = [
     price: 24.99, ship: 7.99,
     images: ["851f1e/8756696427_ffow", "0e8b9a/8756692973_912y", "5a5ef4/8756692971_hm2f", "8aab7a/8756692981_3kx0"].map(img),
     options: [ { label: "Set", choices: [ { name: "Caddy + 4 coasters", price: 24.99 }, { name: "Caddy only", price: 16.99 } ] } ],
-    notes: true, notesHint: "Name plate text + coaster design"
+    notes: true, notesRequired: true, notesHint: "Name plate text + coaster design"
   },
 
   /* ---------------- VEHICLE MOLLE ---------------- */
@@ -334,12 +337,6 @@ const IDEAS = [
     status: "Testing",
     blurb: "A clip-on mount for a rechargeable motion-sensor puck light — the safe lights up the moment you open the door.",
     image: "photos/bench-light-pod.jpg"
-  },
-  {
-    name: "Custom Evidence Marker Tents",
-    status: "Prototype",
-    blurb: "Numbered evidence markers printed in tough ASA with your agency's name on them. Department orders welcome.",
-    image: ""
   },
   {
     name: "License Plate Frames",

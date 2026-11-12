@@ -214,3 +214,9 @@ button,input,select,textarea{font:inherit;color:inherit}
   .modal{border-radius:0;max-height:100vh;height:100%}
   .m-body{padding:18px 16px 28px}
 }
+
+/* required choices */
+.req{color:var(--red);font-style:normal;font-weight:700}
+.m-body .invalid{border-color:var(--red)!important;box-shadow:0 0 0 2px rgba(211,47,47,.25)}
+.m-error{background:rgba(211,47,47,.12);border:1px solid var(--red);color:#ffb4b4;border-radius:5px;padding:9px 12px;font-size:13.5px}
+.m-body select:invalid{color:var(--dim)}
