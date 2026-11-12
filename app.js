@@ -6,7 +6,8 @@ const SETTINGS = {
   // Paste your PayPal LIVE Client ID here (PayPal Developer > Apps & Credentials).
   // Leave "" until you have it: the cart will offer "Email this order" instead.
   PAYPAL_CLIENT_ID: "AeT4AFO8v4i9tBjWk0grGxbo2JEcvjG-3woQQS1Lm7zVMubUKslOQXD08AVJ9mmQJCGTjzav9PpYdSOH",
-  ORDER_EMAIL: "fahedsalamehlz@gmail.com",
+  ORDER_EMAIL: "orders@primalprints3d.com",
+  CUSTOM_EMAIL: "custom@primalprints3d.com",
   BRAND: "Primal Prints",
   CART_KEY: "pp_cart_v2"
 };
@@ -290,7 +291,7 @@ function submitCustom(e) {
   const f = e.target, v = (n) => clean(f.elements[n].value, 1500);
   if (!v("name") || !v("email") || !v("details")) { toast("Please add your name, email and what you need."); return; }
   const body = `Name: ${v("name")}\nEmail: ${v("email")}\nQuantity: ${v("qty") || 1}\nColors: ${v("colors") || "-"}\nNeeded by: ${v("date") || "-"}\nReference: ${v("link") || "-"}\n\nDetails:\n${v("details")}`;
-  location.href = "mailto:" + SETTINGS.ORDER_EMAIL + "?subject=" + encodeURIComponent("Custom order request from " + v("name")) + "&body=" + encodeURIComponent(body);
+  location.href = "mailto:" + SETTINGS.CUSTOM_EMAIL + "?subject=" + encodeURIComponent("Custom order request from " + v("name")) + "&body=" + encodeURIComponent(body);
   toast("Opening your email app…");
 }
 
