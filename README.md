@@ -22,3 +22,6 @@ Add an entry to `IDEAS` at the bottom of `products.js` (name, status, blurb, opt
 - Never put passwords or PayPal **secret** keys in this repo. The Client ID is public by design.
 - Turn on two-factor login for GitHub and PayPal.
 - **Before shipping any order, check the PayPal amount matches the catalog price.** A technical buyer could tamper with their own browser; PayPal's receipt shows exactly what they paid.
+
+## Updating
+When you change app.js, products.js or styles.css, bump the ?v= number on them in index.html so visitors get the new version right away.
