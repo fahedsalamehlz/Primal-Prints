@@ -5,7 +5,7 @@
 const SETTINGS = {
   // Paste your PayPal LIVE Client ID here (PayPal Developer > Apps & Credentials).
   // Leave "" until you have it: the cart will offer "Email this order" instead.
-  PAYPAL_CLIENT_ID: "",
+  PAYPAL_CLIENT_ID: "AeT4AFO8v4i9tBjWk0grGxbo2JEcvjG-3woQQS1Lm7zVMubUKslOQXD08AVJ9mmQJCGTjzav9PpYdSOH",
   ORDER_EMAIL: "fahedsalamehlz@gmail.com",
   BRAND: "Primal Prints",
   CART_KEY: "pp_cart_v2"
