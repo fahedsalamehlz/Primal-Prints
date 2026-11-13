@@ -41,7 +41,7 @@ const CATEGORIES = [
 // Holder choices for the Full Set (price is the same whichever 4 are picked)
 function SET_HOLDERS() {
   return ["AR 1-Mag Holder", "AR 2-Mag Holder", "AR 3-Mag Holder",
-          "Pistol 1-Mag Holder", "Pistol 2-Mag Holder", "Pistol 3-Mag Holder",
+          "Pistol 1-Mag Holder", "Pistol 2-Mag Holder", "Pistol 3-Mag Holder", "Pistol 4-Mag Holder",
           "Flashlight Holder", "Battery Caddy"].map(name => ({ name }));
 }
 
@@ -50,7 +50,7 @@ const PRODUCTS = [
   {
     id: "safe-set", cat: "safe", featured: true,
     name: "Gun Safe Door Organizer — Full Set",
-    blurb: "A rigid MOLLE tile plus 4 clip-on holders you pick: AR mag holders (1, 2 or 3 mags), pistol mag holders (1, 2 or 3 mags), a flashlight holder or a battery caddy. Sticks on with magnets or heavy-duty Velcro — no drilling, no sagging fabric. Works on a safe door, fridge or tool box too.",
+    blurb: "A rigid MOLLE tile plus 4 clip-on holders you pick: AR mag holders (1, 2 or 3 mags), pistol mag holders (1, 2, 3 or 4 mags), a flashlight holder or a battery caddy. Sticks on with magnets or heavy-duty Velcro — no drilling, no sagging fabric. Works on a safe door, fridge or tool box too.",
     specs: ["9 x 8 in tile", "4 holders of your choice", "No drilling", "PETG"],
     price: 77.99, ship: 7,
     images: ["0b235d/8838040102_imby", "aae725/8811225894_3jw8", "828307/8729163176_4bct", "cb6769/8768336891_kkxo"].map(img),
