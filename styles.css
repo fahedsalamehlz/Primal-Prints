@@ -231,3 +231,15 @@ button,input,select,textarea{font:inherit;color:inherit}
 .m-body .invalid{border-color:var(--red)!important;box-shadow:0 0 0 2px rgba(211,47,47,.25)}
 .m-error{background:rgba(211,47,47,.12);border:1px solid var(--red);color:#ffb4b4;border-radius:5px;padding:9px 12px;font-size:13.5px}
 .m-body select:invalid{color:var(--dim)}
+
+/* seconds bin */
+.seconds{border-top:1px solid var(--line)}
+.badge.sec{background:#b8860b}
+.card.second .flaw{font-size:13px;color:var(--muted)}
+.card.second .flaw b{color:#ffd54f;font-weight:700}
+.card.second .price s{color:var(--muted);font-weight:500;font-size:14px;margin-right:6px}
+.card.sold{opacity:.55}
+.card.sold .badge.sec{background:#555}
+.m-flaw{margin:10px 0 0;padding:10px 12px;border:1px solid #6b5a1e;background:rgba(255,213,79,.08);border-radius:6px;font-size:13.5px;color:#e8e2cc}
+.m-flaw b{color:#ffd54f}
+[hidden]{display:none!important}

@@ -22,6 +22,7 @@
      featured  true = shows in the Featured row at the top
 
    Ideas on the bench (prototypes / coming soon) are in IDEAS at the bottom.
+   Seconds (cosmetic flaws, fully working, one of each) are in SECONDS at the bottom.
    ===================================================================== */
 
 const ETSY = "https://i.etsystatic.com/67938469/r/il/";
@@ -30,6 +31,7 @@ const img = (h) => ETSY + h.split("/")[0] + "/" + h.split("/")[1].split("_")[0] 
 
 const CATEGORIES = [
   { id: "safe",      name: "Gun Safe Organizer" },
+  { id: "seconds",   name: "Seconds Bin" },
   { id: "range",     name: "Range & Ammo" },
   { id: "duty",      name: "Police & First Responder" },
   { id: "christmas", name: "Christmas & Gifts" },
@@ -335,3 +337,32 @@ const PRODUCTS = [
    status: "Prototype", "Testing", "Coming soon" (anything you like)
    ===================================================================== */
 const IDEAS = [];
+
+/* =====================================================================
+   SECONDS BIN — prints with cosmetic flaws that still work 100%.
+   One of each. When one sells, delete its block (or set sold: true).
+   Each item:
+     id      unique, start with "sec-"
+     name    what it is
+     flaw    what's wrong with it, in plain words (shown to the buyer)
+     was     normal price (shown crossed out)
+     price   seconds price
+     images  ["photos/seconds/your-photo.jpg", ...] — show the flaw!
+     options (optional) same as above, if the buyer still picks anything
+     sold    true = shows as SOLD and can't be added to the cart
+   Example:
+   {
+     id: "sec-tile-1", name: "Magnetic MOLLE Tile (Gray)",
+     flaw: "Layer lines on one corner and a small scuff on the back. Magnets and fit are perfect.",
+     was: 36.99, price: 24.99,
+     images: ["photos/seconds/tile-1.jpg", "photos/seconds/tile-1-flaw.jpg"]
+   },
+   ===================================================================== */
+const SECONDS = [
+];
+
+/* seconds are sold through the same cart, one of each */
+SECONDS.forEach(s => PRODUCTS.push(Object.assign({
+  cat: "seconds", second: true, max: 1, ship: 7, specs: ["Cosmetic seconds", "Fully functional", "Only 1"],
+  blurb: "A cosmetic second: it looks a little off but works exactly like a new one."
+}, s)));

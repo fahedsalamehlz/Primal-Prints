@@ -61,8 +61,11 @@ function cardHTML(p) {
     </div></article>`;
 }
 
+const SHOP = PRODUCTS.filter(p => !p.second);
+const maxQty = (p) => p.sold ? 0 : (p.max || 20);
+
 function renderFeatured() {
-  $("#featured").innerHTML = PRODUCTS.filter(p => p.featured).slice(0, 4).map(p =>
+  $("#featured").innerHTML = SHOP.filter(p => p.featured).slice(0, 4).map(p =>
     `<button class="feat" type="button" data-open="${p.id}">
        <img src="${esc(p.images[0])}" alt="${esc(p.name)}" loading="lazy">
        <span class="tag">Featured</span>
@@ -71,8 +74,8 @@ function renderFeatured() {
 }
 
 function renderTabs() {
-  const counts = {}; PRODUCTS.forEach(p => counts[p.cat] = (counts[p.cat] || 0) + 1);
-  const tabs = [{ id: "all", name: "All gear", n: PRODUCTS.length }]
+  const counts = {}; SHOP.forEach(p => counts[p.cat] = (counts[p.cat] || 0) + 1);
+  const tabs = [{ id: "all", name: "All gear", n: SHOP.length }]
     .concat(CATEGORIES.filter(c => counts[c.id]).map(c => ({ id: c.id, name: c.name, n: counts[c.id] })));
   $("#tabs").innerHTML = tabs.map(t =>
     `<button class="tab" role="tab" type="button" data-cat="${t.id}" aria-selected="${t.id === activeCat}">${esc(t.name)}<small>${t.n}</small></button>`).join("");
@@ -80,7 +83,7 @@ function renderTabs() {
 
 function renderGrid() {
   const q = $("#search").value.trim().toLowerCase();
-  const list = PRODUCTS.filter(p =>
+  const list = SHOP.filter(p =>
     (activeCat === "all" || p.cat === activeCat) &&
     (!q || (p.name + " " + p.blurb + " " + (p.specs || []).join(" ") + " " + catName(p.cat)).toLowerCase().includes(q)));
   // keep category order when showing everything
@@ -88,6 +91,22 @@ function renderGrid() {
   list.sort((a, b) => order.indexOf(a.cat) - order.indexOf(b.cat));
   $("#grid").innerHTML = list.map(cardHTML).join("");
   $("#empty").hidden = list.length > 0;
+}
+
+function renderSeconds() {
+  const box = $("#seconds-grid"); if (!box) return;
+  const items = PRODUCTS.filter(p => p.second);
+  $("#seconds-empty").hidden = items.length > 0;
+  box.innerHTML = items.map(p => `<article class="card second${p.sold ? " sold" : ""}">
+    <button class="ph" type="button" data-open="${p.id}" aria-label="View ${esc(p.name)}">
+      <img src="${esc(p.images[0])}" alt="${esc(p.name)}" loading="lazy"><span class="badge sec">${p.sold ? "Sold" : "Seconds · Only 1"}</span></button>
+    <div class="bd">
+      <span class="cat">Seconds Bin</span>
+      <h3>${esc(p.name)}</h3>
+      <p class="flaw"><b>The flaw:</b> ${esc(p.flaw || "Cosmetic only.")}</p>
+      <div class="ft"><span class="price">${p.was ? `<s>${money(p.was)}</s>` : ""}${money(lowPrice(p))}</span>
+        <button class="btn small" type="button" data-open="${p.id}"${p.sold ? " disabled" : ""}>${p.sold ? "Sold" : "View"}</button></div>
+    </div></article>`).join("");
 }
 
 function renderBench() {
@@ -121,6 +140,11 @@ function openProduct(id) {
   $("#m-error").hidden = true;
   updateNotesLabel();
   $("#m-qty").value = 1;
+  $("#m-qty").max = maxQty(p) || 1;
+  $("#m-qty").closest("label").hidden = maxQty(p) === 1;
+  $("#m-flaw").hidden = !p.second;
+  $("#m-flaw").innerHTML = p.second ? "<b>Seconds:</b> " + esc(p.flaw || "Cosmetic flaw.") + " Works 100%. Only one available, final sale." : "";
+  $("#m-form button[type=submit]").disabled = !!p.sold;
   $("#m-ship").textContent = p.ship === 0 ? "Free shipping" : "+ " + money(p.ship) + " shipping";
   updateModalPrice();
   show("#modal");
@@ -165,8 +189,8 @@ function loadCart() {
     const raw = JSON.parse(localStorage.getItem(SETTINGS.CART_KEY) || "[]");
     return Array.isArray(raw) ? raw.filter(l => byId[l.id]).map(l => ({
       id: l.id, picks: Array.isArray(l.picks) ? l.picks.map(n => Math.max(0, n | 0)) : [],
-      notes: clean(l.notes, 100), qty: Math.min(20, Math.max(1, l.qty | 0))
-    })).filter(l => (byId[l.id].options || []).every((o, i) => (l.picks[i] || 0) < o.choices.length)) : [];
+      notes: clean(l.notes, 100), qty: Math.min(maxQty(byId[l.id]) || 1, Math.max(1, l.qty | 0))
+    })).filter(l => !byId[l.id].sold).filter(l => (byId[l.id].options || []).every((o, i) => (l.picks[i] || 0) < o.choices.length)) : [];
   } catch (e) { return []; }
 }
 let cart = loadCart();
@@ -195,9 +219,13 @@ function addToCart() {
   $("#m-error").hidden = true;
   const picks = picksNow();
   const notes = clean($("#m-notes").value, 100);
-  const qty = Math.min(20, Math.max(1, parseInt($("#m-qty").value, 10) || 1));
+  if (current.sold) { toast("Sorry, that one has sold."); return; }
+  const cap = maxQty(current);
+  const qty = Math.min(cap, Math.max(1, parseInt($("#m-qty").value, 10) || 1));
+  const inCart = cart.filter(l => l.id === current.id).reduce((n, l) => n + l.qty, 0);
+  if (inCart >= cap) { hide("#modal"); toast(cap === 1 ? "That one-of-a-kind item is already in your cart" : "Already at the limit in your cart"); return; }
   const same = cart.find(l => l.id === current.id && l.notes === notes && JSON.stringify(l.picks) === JSON.stringify(picks));
-  if (same) same.qty = Math.min(20, same.qty + qty); else cart.push({ id: current.id, picks, notes, qty });
+  if (same) same.qty = Math.min(cap, same.qty + qty); else cart.push({ id: current.id, picks, notes, qty: Math.min(qty, cap - inCart) });
   saveCart(); hide("#modal"); toast("Added to cart");
 }
 
@@ -216,7 +244,7 @@ function renderCart() {
       <div><h4>${esc(p.name)}</h4>
         ${opts.map(o => `<div class="opt">${esc(o)}</div>`).join("")}
         ${l.notes ? `<div class="opt">Notes: ${esc(l.notes)}</div>` : ""}
-        <div class="q"><button type="button" data-dec="${i}" aria-label="Fewer">−</button><span>${l.qty}</span><button type="button" data-inc="${i}" aria-label="More">+</button>
+        <div class="q"><button type="button" data-dec="${i}" aria-label="Fewer">−</button><span>${l.qty}</span><button type="button" data-inc="${i}" aria-label="More"${l.qty >= maxQty(p) ? " disabled" : ""}>+</button>
           <button class="rm" type="button" data-rm="${i}">Remove</button></div></div>
       <div class="lp">${money(unit * l.qty)}</div></div>`;
   }).join("");
@@ -310,7 +338,7 @@ document.addEventListener("click", (e) => {
     else if (t.dataset.cat) { activeCat = t.dataset.cat; renderTabs(); renderGrid(); }
     else if ("close" in t.dataset) hide("#" + t.closest(".overlay").id);
     else if ("closeCart" in t.dataset) hide("#cart");
-    else if (t.dataset.inc) { const l = cart[+t.dataset.inc]; l.qty = Math.min(20, l.qty + 1); saveCart(); }
+    else if (t.dataset.inc) { const l = cart[+t.dataset.inc]; l.qty = Math.min(maxQty(byId[l.id]) || 1, l.qty + 1); saveCart(); }
     else if (t.dataset.dec) { const l = cart[+t.dataset.dec]; if (l.qty > 1) { l.qty--; saveCart(); } }
     else if (t.dataset.rm) { cart.splice(+t.dataset.rm, 1); saveCart(); }
     else if (t.dataset.idea) {
@@ -331,4 +359,4 @@ $("#email-order").addEventListener("click", emailOrder);
 $("#custom-form").addEventListener("submit", submitCustom);
 $("#search").addEventListener("input", renderGrid);
 
-renderFeatured(); renderTabs(); renderGrid(); renderBench(); renderCart();
+renderFeatured(); renderTabs(); renderGrid(); renderSeconds(); renderBench(); renderCart();
