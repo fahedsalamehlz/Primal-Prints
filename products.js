@@ -70,7 +70,7 @@ const PRODUCTS = [
     name: "Magnetic MOLLE Safe Panel — Tile Only",
     blurb: "The 9 x 8 in rigid MOLLE tile on its own, ready for any of our clip-on holders. Magnetic back for bare steel or Velcro back for felt-lined safes, plus built-in screw holes.",
     specs: ["9 x 8 in", "Magnetic or Velcro", "Screw holes"],
-    price: 41.99, ship: 7,
+    price: 36.99, ship: 7,
     images: ["2384e0/8719472474_atcp", "83b1d2/8767301739_p97f", "0b235d/8838040102_imby"].map(img),
     options: [
       { label: "Tile backing", choices: [ { name: "Magnetic (steel doors)" }, { name: "Velcro (felt-lined safes)" } ] },
@@ -143,7 +143,7 @@ const PRODUCTS = [
     blurb: "A glowing thin blue line flag for a desk, shelf or wall. A strong retirement or academy-graduation gift.",
     specs: ["LED", "Desk or wall"],
     price: 43.99, ship: 7,
-    images: ["4d65ce/8869109555_pl1t", "966528/8869116283_ww2w", "6f7680/8821308930_2s3z", "07974d/8821308932_gkin"].map(img)
+    images: ["photos/flag-lit.jpg"].concat(["966528/8869116283_ww2w", "6f7680/8821308930_2s3z", "07974d/8821308932_gkin"].map(img))
   },
   {
     id: "coin-rack", cat: "duty",
