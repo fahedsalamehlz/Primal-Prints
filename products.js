@@ -22,7 +22,7 @@
      featured  true = shows in the Featured row at the top
 
    Ideas on the bench (prototypes / coming soon) are in IDEAS at the bottom.
-   Seconds (cosmetic flaws, fully working, one of each) are in SECONDS at the bottom.
+   OH SHOOT Bin (cosmetic flaws, fully working, one of each) items are in SECONDS at the bottom.
    ===================================================================== */
 
 const ETSY = "https://i.etsystatic.com/67938469/r/il/";
@@ -31,7 +31,7 @@ const img = (h) => ETSY + h.split("/")[0] + "/" + h.split("/")[1].split("_")[0] 
 
 const CATEGORIES = [
   { id: "safe",      name: "Gun Safe Organizer" },
-  { id: "seconds",   name: "Seconds Bin" },
+  { id: "seconds",   name: "OH SHOOT Bin" },
   { id: "range",     name: "Range & Ammo" },
   { id: "duty",      name: "Police & First Responder" },
   { id: "christmas", name: "Christmas & Gifts" },
@@ -363,6 +363,6 @@ const SECONDS = [
 
 /* seconds are sold through the same cart, one of each */
 SECONDS.forEach(s => PRODUCTS.push(Object.assign({
-  cat: "seconds", second: true, max: 1, ship: 7, specs: ["Cosmetic seconds", "Fully functional", "Only 1"],
+  cat: "seconds", second: true, max: 1, ship: 7, specs: ["Cosmetic flaw", "Fully functional", "Only 1"],
   blurb: "A cosmetic second: it looks a little off but works exactly like a new one."
 }, s)));

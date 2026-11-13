@@ -99,9 +99,9 @@ function renderSeconds() {
   $("#seconds-empty").hidden = items.length > 0;
   box.innerHTML = items.map(p => `<article class="card second${p.sold ? " sold" : ""}">
     <button class="ph" type="button" data-open="${p.id}" aria-label="View ${esc(p.name)}">
-      <img src="${esc(p.images[0])}" alt="${esc(p.name)}" loading="lazy"><span class="badge sec">${p.sold ? "Sold" : "Seconds · Only 1"}</span></button>
+      <img src="${esc(p.images[0])}" alt="${esc(p.name)}" loading="lazy"><span class="badge sec">${p.sold ? "Sold" : "OH SHOOT · Only 1"}</span></button>
     <div class="bd">
-      <span class="cat">Seconds Bin</span>
+      <span class="cat">OH SHOOT Bin</span>
       <h3>${esc(p.name)}</h3>
       <p class="flaw"><b>The flaw:</b> ${esc(p.flaw || "Cosmetic only.")}</p>
       <div class="ft"><span class="price">${p.was ? `<s>${money(p.was)}</s>` : ""}${money(lowPrice(p))}</span>
@@ -143,7 +143,7 @@ function openProduct(id) {
   $("#m-qty").max = maxQty(p) || 1;
   $("#m-qty").closest("label").hidden = maxQty(p) === 1;
   $("#m-flaw").hidden = !p.second;
-  $("#m-flaw").innerHTML = p.second ? "<b>Seconds:</b> " + esc(p.flaw || "Cosmetic flaw.") + " Works 100%. Only one available, final sale." : "";
+  $("#m-flaw").innerHTML = p.second ? "<b>OH SHOOT:</b> " + esc(p.flaw || "Cosmetic flaw.") + " Works 100%. Only one available, final sale." : "";
   $("#m-form button[type=submit]").disabled = !!p.sold;
   $("#m-ship").textContent = p.ship === 0 ? "Free shipping" : "+ " + money(p.ship) + " shipping";
   updateModalPrice();
