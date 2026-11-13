@@ -38,11 +38,13 @@ const CATEGORIES = [
   { id: "home",      name: "Home & Health" }
 ];
 
-// Holder choices for the Full Set (price is the same whichever 4 are picked)
+// Holder choices for the Full Set: 3-mag holders +$1, 4-mag holder +$2
 function SET_HOLDERS() {
-  return ["AR 1-Mag Holder", "AR 2-Mag Holder", "AR 3-Mag Holder",
-          "Pistol 1-Mag Holder", "Pistol 2-Mag Holder", "Pistol 3-Mag Holder", "Pistol 4-Mag Holder",
-          "Flashlight Holder", "Battery Caddy"].map(name => ({ name }));
+  return [
+    { name: "AR 1-Mag Holder" }, { name: "AR 2-Mag Holder" }, { name: "AR 3-Mag Holder", add: 1 },
+    { name: "Pistol 1-Mag Holder" }, { name: "Pistol 2-Mag Holder" }, { name: "Pistol 3-Mag Holder", add: 1 },
+    { name: "Pistol 4-Mag Holder", add: 2 },
+    { name: "Flashlight Holder" }, { name: "Battery Caddy" } ];
 }
 
 const PRODUCTS = [
