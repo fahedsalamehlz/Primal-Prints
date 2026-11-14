@@ -126,7 +126,7 @@ const PRODUCTS = [
     blurb: "Everything for one steel 50 cal M2A1 can: 10 stacking trays, 2 top lids and a twist-lock T-key. Every 9mm round stands upright in its own pocket. Drop the key through the keyhole, quarter turn, and lift any layer straight out.",
     specs: ["M2A1 50 cal can", "1,190 rds", "T-key lift", "ASA", "Ammo not included"],
     price: 99.99, ship: 0,
-    images: ["photos/9mm-tray-empty.jpg", "photos/9mm-tkey-in-stack.jpg", "photos/9mm-stack-in-can.jpg", "photos/9mm-tray-in-can.jpg", "photos/9mm-tray-loaded.jpg", "photos/9mm-tkey.jpg", "photos/9mm-lid.jpg"]
+    images: ["photos/9mm-tkey-in-stack.jpg", "photos/9mm-tray-empty.jpg", "photos/9mm-stack-in-can.jpg", "photos/9mm-tray-in-can.jpg", "photos/9mm-tray-loaded.jpg", "photos/9mm-tkey.jpg", "photos/9mm-lid.jpg"]
   },
   {
     id: "9mm-can-parts", cat: "range",
@@ -134,7 +134,7 @@ const PRODUCTS = [
     blurb: "Single parts for the 9mm organizer, so you can start small, add a layer or replace a piece. One Tray A and one Tray B sit side by side to make a layer of 238 rounds. Lids cap the top layer, and one T-key lifts any layer out. Filling a whole can? The Full Set costs far less.",
     specs: ["M2A1 50 cal can", "119 rds per tray", "ASA", "Ammo not included"],
     price: 24.99, ship: 7,
-    images: ["photos/9mm-tray-empty.jpg", "photos/9mm-tray-loaded.jpg", "photos/9mm-tkey.jpg", "photos/9mm-lid.jpg", "photos/9mm-tkey-in-stack.jpg"],
+    images: ["photos/9mm-tray-loaded.jpg", "photos/9mm-tray-empty.jpg", "photos/9mm-tkey.jpg", "photos/9mm-lid.jpg", "photos/9mm-tkey-in-stack.jpg"],
     options: [
       { label: "Part", choices: [
         { name: "Tray A — 119 rds", price: 24.99 },
