@@ -171,6 +171,15 @@ const PRODUCTS = [
     images: ["photos/flag-lit.jpg"].concat(["966528/8869116283_ww2w", "6f7680/8821308930_2s3z", "07974d/8821308932_gkin"].map(img))
   },
   {
+    id: "shield-coin", cat: "duty", featured: true,
+    name: "Ballistic Shield Challenge Coin Display",
+    blurb: "A challenge coin display built like a real tactical ballistic shield: bolted clear viewport, POLICE nameplate and heavy edge trim. Stands on its kickstand or hangs on the wall. A strong academy graduation, promotion or retirement gift.",
+    specs: ["9 or 12 coins", "Coins up to 1.75 in", "Desk or wall", "Clear acrylic window"],
+    price: 34.99, ship: 7,
+    images: ["photos/shield_1.jpg", "photos/shield_2.jpg", "photos/shield_3.jpg", "photos/shield_4.jpg", "photos/shield_5.jpg", "photos/shield_6.jpg"],
+    options: [ { label: "Size", choices: [ { name: "Small - 9 coins (6.3 x 9.8 in)", price: 34.99 }, { name: "Large - 12 coins (6.9 x 11.6 in)", price: 47.99 } ] } ]
+  },
+  {
     id: "coin-rack", cat: "duty",
     name: "Personalized Challenge Coin Display",
     blurb: "Shows off 7 challenge coins on a thin blue line rack with your name across the front.",
