@@ -188,7 +188,8 @@ button,input,select,textarea{font:inherit;color:inherit}
 .sum{display:flex;justify-content:space-between;color:var(--muted);font-size:14px}
 .sum.total{color:#fff;font-weight:800;font-size:17px;border-top:1px solid var(--line);padding-top:8px;margin-bottom:6px}
 .cart-empty{color:var(--muted);text-align:center;padding:40px 0}
-#paypal-buttons{min-height:10px}
+#paypal-buttons{min-height:10px;background:#fff;color:#1a1a1a;border-radius:8px;padding:14px 12px 6px;color-scheme:light}
+#paypal-buttons:empty{display:none}
 
 .toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,120px);background:#fff;color:#111;font-weight:700;font-size:14px;padding:11px 18px;border-radius:999px;box-shadow:0 8px 30px rgba(0,0,0,.4);transition:transform .25s;z-index:200}
 .toast.show{transform:translate(-50%,0)}
