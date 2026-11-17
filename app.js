@@ -291,11 +291,15 @@ function setupCheckout() {
           application_context: { brand_name: SETTINGS.BRAND, shipping_preference: "GET_FROM_FILE", user_action: "PAY_NOW" }
         });
       },
-      onApprove: (data, actions) => actions.order.capture().then(() => {
+      onApprove: (data, actions) => {
+        const summary = orderSummary(), total = totals().total;
+        return actions.order.capture().then((details) => {
+        notifyOrder(summary, total, details, data);
         cart = []; saveCart(); hide("#cart");
         toast("Order placed — thank you!");
         setTimeout(() => alert("Thank you! Your order is confirmed. You'll get a PayPal receipt by email, and we'll email you when it ships."), 300);
-      }),
+      });
+      },
       onError: () => toast("Payment didn't go through. Please try again.")
     }).render("#paypal-buttons");
   };
@@ -306,6 +310,34 @@ function setupCheckout() {
   s.onload = () => { paypalLoaded = true; render(); };
   s.onerror = () => { $("#checkout-fallback").hidden = false; };
   document.head.appendChild(s);
+}
+
+/* ---------- order notification email (to SETTINGS.ORDER_EMAIL via FormSubmit) ---------- */
+function notifyOrder(summary, total, d, data) {
+  try {
+    const pu = (d && d.purchase_units && d.purchase_units[0]) || {};
+    const sh = pu.shipping || {}, a = sh.address || {}, payer = (d && d.payer) || {};
+    const cap = ((pu.payments && pu.payments.captures) || [])[0] || {};
+    const buyer = (sh.name && sh.name.full_name) ||
+      [payer.name && payer.name.given_name, payer.name && payer.name.surname].filter(Boolean).join(" ") || "Customer";
+    const shipTo = [sh.name && sh.name.full_name, a.address_line_1, a.address_line_2,
+      [a.admin_area_2, a.admin_area_1, a.postal_code].filter(Boolean).join(", "), a.country_code].filter(Boolean).join("\n");
+    fetch("https://formsubmit.co/ajax/" + SETTINGS.ORDER_EMAIL, {
+      method: "POST", keepalive: true,
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify({
+        _subject: "New order: " + buyer + " (" + money(total) + ")",
+        _template: "box", _captcha: "false",
+        "Order": summary,
+        "Customer": buyer,
+        "Customer email": payer.email_address || "",
+        "Ship to": shipTo || "See PayPal transaction",
+        "PayPal transaction ID": cap.id || "",
+        "PayPal order ID": (d && d.id) || (data && data.orderID) || "",
+        "Payment status": cap.status || (d && d.status) || ""
+      })
+    }).catch(() => {});
+  } catch (e) { /* the sale already went through; never block the thank-you */ }
 }
 
 function emailOrder() {
