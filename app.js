@@ -65,7 +65,7 @@ const SHOP = PRODUCTS.filter(p => !p.second);
 const maxQty = (p) => p.sold ? 0 : (p.max || 20);
 
 function renderFeatured() {
-  $("#featured").innerHTML = SHOP.filter(p => p.featured).slice(0, 4).map(p =>
+  $("#featured").innerHTML = SHOP.filter(p => p.featured).sort((x, y) => (x.featuredRank || 99) - (y.featuredRank || 99)).slice(0, 4).map(p =>
     `<button class="feat" type="button" data-open="${p.id}">
        <img src="${esc(p.images[0])}" alt="${esc(p.name)}" loading="lazy">
        <span class="tag">Featured</span>
@@ -360,3 +360,14 @@ $("#custom-form").addEventListener("submit", submitCustom);
 $("#search").addEventListener("input", renderGrid);
 
 renderFeatured(); renderTabs(); renderGrid(); renderSeconds(); renderBench(); renderCart();
+
+/* ---------- direct product links (e.g. primalprints3d.com/#shield-coin) ---------- */
+function openFromHash() {
+  const id = decodeURIComponent(location.hash.slice(1));
+  if (!byId[id]) return;
+  const card = document.querySelector('#grid [data-open="' + id + '"]');
+  if (card) card.scrollIntoView({ block: "center" });
+  openProduct(id);
+}
+openFromHash();
+window.addEventListener("hashchange", openFromHash);

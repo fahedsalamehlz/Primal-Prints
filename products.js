@@ -20,6 +20,7 @@
      (a single choice can also have requiresNotes: true, e.g. "Build Your Own")
    Every option must be picked before an item can go in the cart.
      featured  true = shows in the Featured row at the top
+     featuredRank  optional; lower numbers show first in the Featured row (max 4 shown)
 
    Ideas on the bench (prototypes / coming soon) are in IDEAS at the bottom.
    OH SHOOT Bin (cosmetic flaws, fully working, one of each) items are in SECONDS at the bottom.
@@ -171,7 +172,7 @@ const PRODUCTS = [
     images: ["photos/flag-lit.jpg"].concat(["966528/8869116283_ww2w", "6f7680/8821308930_2s3z", "07974d/8821308932_gkin"].map(img))
   },
   {
-    id: "shield-coin", cat: "duty", featured: true,
+    id: "shield-coin", cat: "duty", featured: true, featuredRank: 1,
     name: "Shield Challenge Coin Display (Custom Nameplate)",
     blurb: "A challenge coin display built like a real tactical shield: bolted clear viewport, raised nameplate and heavy edge trim. Choose POLICE, SHERIFF or your own text (DETENTION, CORRECTIONS, ARMY, NAVY, a last name, anything up to 12 letters). Stands on its kickstand or hangs on the wall. A strong academy graduation, promotion or retirement gift.",
     specs: ["9 or 12 coins", "Coins up to 1.75 in", "Desk or wall", "Custom nameplate"],
