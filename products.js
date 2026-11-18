@@ -177,7 +177,7 @@ const PRODUCTS = [
     blurb: "A challenge coin display built like a real tactical shield: bolted clear viewport, raised nameplate and heavy edge trim. Choose POLICE, SHERIFF or your own text (DETENTION, CORRECTIONS, ARMY, NAVY, a last name, anything up to 12 letters). Stands on its kickstand or hangs on the wall. A strong academy graduation, promotion or retirement gift.",
     specs: ["9 or 12 coins", "Coins up to 1.75 in", "Desk or wall", "Custom nameplate"],
     price: 34.99, ship: 7,
-    images: ["photos/shield_1.jpg", "photos/shield_2.jpg", "photos/shield_3.jpg", "photos/shield_4.jpg", "photos/shield_5.jpg", "photos/shield_6.jpg", "photos/shield_7.jpg"],
+    images: ["photos/shield_1.jpg", "photos/shield_2.jpg", "photos/shield_3.jpg", "photos/shield_4.jpg", "photos/shield_5.jpg", "photos/shield_6.jpg"],
     options: [
       { label: "Size", choices: [ { name: "Small - 9 coins (6.3 x 9.8 in)", price: 34.99 }, { name: "Large - 12 coins (6.9 x 11.6 in)", price: 47.99 } ] },
       { label: "Nameplate", choices: [ { name: "POLICE" }, { name: "SHERIFF" }, { name: "Custom text", requiresNotes: true } ] }

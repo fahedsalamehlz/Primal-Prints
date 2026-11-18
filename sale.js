@@ -20,6 +20,7 @@ const SALE = { start: "2026-11-17", end: "2026-11-20", percent: 15, label: "15% 
     }));
   });
   window.SALE_ACTIVE = true;
+  window.SALE_F = f;
   const b = document.createElement("div");
   b.setAttribute("role", "note");
   b.style.cssText = "background:#d32f2f;color:#fff;text-align:center;padding:10px 16px;font:800 15px/1.3 system-ui,sans-serif;letter-spacing:1px";

@@ -42,6 +42,8 @@ function lowPrice(p) {
   walk(0, []); return low;
 }
 const hasRange = (p) => (p.options || []).some(o => o.choices.some(c => "price" in c || "add" in c));
+/* sale: show the regular price crossed out */
+const wasHTML = (p, n) => (window.SALE_ACTIVE && window.SALE_F && !p.second) ? `<s class="was">${money(Math.round(n / window.SALE_F * 100) / 100)}</s>` : "";
 
 /* ---------- shop rendering ---------- */
 let activeCat = "all";
@@ -56,7 +58,7 @@ function cardHTML(p) {
       <span class="cat">${esc(catName(p.cat))}</span>
       <h3>${esc(p.name)}</h3>
       <p>${esc(p.blurb)}</p>
-      <div class="ft"><span class="price">${from}${money(lowPrice(p))}</span>
+      <div class="ft"><span class="price">${from}${wasHTML(p, lowPrice(p))}${money(lowPrice(p))}</span>
         <button class="btn small" type="button" data-open="${p.id}">${p.options || p.notes ? "Choose options" : "View"}</button></div>
     </div></article>`;
 }
@@ -69,7 +71,7 @@ function renderFeatured() {
     `<button class="feat" type="button" data-open="${p.id}">
        <img src="${esc(p.images[0])}" alt="${esc(p.name)}" loading="lazy">
        <span class="tag">Featured</span>
-       <span class="cap"><b>${esc(p.name)}</b><span>${hasRange(p) ? "from " : ""}${money(lowPrice(p))}</span></span>
+       <span class="cap"><b>${esc(p.name)}</b><span>${hasRange(p) ? "from " : ""}${wasHTML(p, lowPrice(p))}${money(lowPrice(p))}</span></span>
      </button>`).join("");
 }
 
@@ -168,7 +170,8 @@ function updateNotesLabel() {
 function updateModalPrice() {
   const picks = picksNow();
   const done = picks.every(n => n >= 0);
-  $("#m-price").textContent = done ? money(priceFor(current, picks)) : (hasRange(current) ? "from " : "") + money(lowPrice(current));
+  const n = done ? priceFor(current, picks) : lowPrice(current);
+  $("#m-price").innerHTML = (!done && hasRange(current) ? "from " : "") + wasHTML(current, n) + money(n);
   updateNotesLabel();
 }
 function missingFields() {
