@@ -271,3 +271,8 @@ s.was{color:var(--muted);font-weight:500;font-size:.72em;margin-right:6px;text-d
 .event-main b{color:#fff}
 .event-sub{flex-basis:100%;color:var(--muted);font-size:13.5px;margin:0}
 @media (max-width:680px){.event-inner{padding:14px 16px}.event-main{font-size:15px}}
+
+/* custom form sent */
+.form-done{text-align:left}
+.form-done h3{margin:0 0 8px;color:var(--ok)}
+.form-done p{margin:0 0 8px}

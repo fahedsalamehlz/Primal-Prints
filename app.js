@@ -348,14 +348,42 @@ function emailOrder() {
   location.href = "mailto:" + SETTINGS.ORDER_EMAIL + "?subject=" + encodeURIComponent("Order request — " + SETTINGS.BRAND) + "&body=" + encodeURIComponent(body);
 }
 
-/* ---------- custom order form ---------- */
+/* ---------- custom order form (sends straight from the site via FormSubmit) ---------- */
 function submitCustom(e) {
   e.preventDefault();
   const f = e.target, v = (n) => clean(f.elements[n].value, 1500);
   if (!v("name") || !v("email") || !v("details")) { toast("Please add your name, email and what you need."); return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v("email"))) { toast("Please check your email address."); return; }
+  if (f.elements._honey && f.elements._honey.value) return; // bot
+  const btn = f.querySelector('button[type="submit"]'), label = btn.textContent;
+  btn.disabled = true; btn.textContent = "Sending…";
   const body = `Name: ${v("name")}\nEmail: ${v("email")}\nQuantity: ${v("qty") || 1}\nColors: ${v("colors") || "-"}\nNeeded by: ${v("date") || "-"}\nReference: ${v("link") || "-"}\n\nDetails:\n${v("details")}`;
-  location.href = "mailto:" + SETTINGS.CUSTOM_EMAIL + "?subject=" + encodeURIComponent("Custom order request from " + v("name")) + "&body=" + encodeURIComponent(body);
-  toast("Opening your email app…");
+  const fallback = () => {
+    btn.disabled = false; btn.textContent = label;
+    toast("Couldn't send. Opening your email app instead…");
+    location.href = "mailto:" + SETTINGS.CUSTOM_EMAIL + "?subject=" + encodeURIComponent("Custom order request from " + v("name")) + "&body=" + encodeURIComponent(body);
+  };
+  fetch("https://formsubmit.co/ajax/" + SETTINGS.ORDER_EMAIL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "Accept": "application/json" },
+    body: JSON.stringify({
+      _subject: "Custom quote request: " + v("name"),
+      _replyto: v("email"),
+      _template: "box", _captcha: "false",
+      "Name": v("name"), "Email": v("email"),
+      "Quantity": v("qty") || "1", "Colors": v("colors") || "-",
+      "Needed by": v("date") || "-", "Reference": v("link") || "-",
+      "What to make": v("details")
+    })
+  }).then(r => r.json()).then(j => {
+    if (!j || String(j.success) !== "true") throw new Error("send failed");
+    const done = document.createElement("div");
+    done.className = "form form-done";
+    done.innerHTML = `<h3>Request sent ✓</h3><p>Thanks, ${v("name").split(" ")[0].replace(/[<>&"]/g, "")}. We'll email a quote to <b></b> within 24–48 hours.</p><p class="fine">Didn't get a reply? Check your spam folder or email <a href="mailto:${SETTINGS.CUSTOM_EMAIL}">${SETTINGS.CUSTOM_EMAIL}</a>.</p>`;
+    done.querySelector("b").textContent = v("email");
+    f.replaceWith(done);
+    toast("Quote request sent");
+  }).catch(fallback);
 }
 
 /* ---------- overlays ---------- */
