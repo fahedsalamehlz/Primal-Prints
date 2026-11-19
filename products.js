@@ -190,7 +190,7 @@ const PRODUCTS = [
     blurb: "A challenge coin display built around the fire service's most iconic tool. A red Halligan bar rides on two posts above 5 angled coin slots, with a snap-in red FIRE nameplate up front, or your own station, engine or ladder number. A strong academy graduation, promotion, retirement or station gift.",
     specs: ["Holds 5 coins", "Coins 1.5–2 in", "Snap-in nameplate", "9.4 x 3.9 x 5.2 in"],
     price: 39.99, ship: 7,
-    images: ["photos/halligan_1.jpg", "photos/halligan_2.jpg", "photos/halligan_3.jpg", "photos/halligan_4.jpg"],
+    images: ["halligan_1.jpg", "halligan_2.jpg", "halligan_3.jpg", "halligan_4.jpg"],
     options: [
       { label: "Nameplate", choices: [ { name: "FIRE" }, { name: "Custom text", add: 5, requiresNotes: true } ] }
     ],
