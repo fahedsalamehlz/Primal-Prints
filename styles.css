@@ -276,3 +276,7 @@ s.was{color:var(--muted);font-weight:500;font-size:.72em;margin-right:6px;text-d
 .form-done{text-align:left}
 .form-done h3{margin:0 0 8px;color:var(--ok)}
 .form-done p{margin:0 0 8px}
+
+/* checkbox row */
+.form .check{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--muted);cursor:pointer;line-height:1.4}
+.form .check input{width:18px;height:18px;margin:1px 0 0;flex:0 0 18px;accent-color:var(--red)}

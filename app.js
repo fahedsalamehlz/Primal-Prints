@@ -348,6 +348,21 @@ function emailOrder() {
   location.href = "mailto:" + SETTINGS.ORDER_EMAIL + "?subject=" + encodeURIComponent("Order request — " + SETTINGS.BRAND) + "&body=" + encodeURIComponent(body);
 }
 
+/* sign someone up through the Omnisend newsletter form already on the page */
+function joinNewsletter(email) {
+  try {
+    const box = document.querySelector('[id^="omnisend-embedded"]');
+    const inp = box && box.querySelector('input[type="email"], input[id*="emailField"]');
+    if (!inp) return false;
+    Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "value").set.call(inp, email);
+    inp.dispatchEvent(new Event("input", { bubbles: true }));
+    inp.dispatchEvent(new Event("change", { bubbles: true }));
+    const btn = box.querySelector('button[type="submit"], [id*="submit"] button, button');
+    if (btn) { btn.click(); return true; }
+  } catch (e) {}
+  return false;
+}
+
 /* ---------- custom order form (sends straight from the site via FormSubmit) ---------- */
 function submitCustom(e) {
   e.preventDefault();
@@ -365,6 +380,8 @@ function submitCustom(e) {
   };
   // FormSubmit can take 30+ seconds to answer. Send with keepalive so it finishes in the
   // background, and show "sent" after a few seconds unless it fails fast.
+  const wantsNews = !!(f.elements.news && f.elements.news.checked);
+  if (wantsNews) joinNewsletter(v("email"));
   let settled = false;
   const showDone = () => {
     if (settled) return; settled = true;
@@ -383,7 +400,9 @@ function submitCustom(e) {
       _subject: "Custom quote request: " + v("name"),
       _replyto: v("email"),
       _template: "box", _captcha: "false",
-      "Name": v("name"), "Email": v("email"),
+      _autoresponse: "Thanks for your custom order request with Primal Prints! We got your details and will reply with a quote within 24-48 hours. If you need to add anything, just reply to this email or write to " + SETTINGS.CUSTOM_EMAIL + ". - Primal Prints, Tempe, AZ",
+      "Name": v("name"), email: v("email"),
+      "Newsletter": wantsNews ? "Yes - add to list" : "No",
       "Quantity": v("qty") || "1", "Colors": v("colors") || "-",
       "Needed by": v("date") || "-", "Reference": v("link") || "-",
       "What to make": v("details")
