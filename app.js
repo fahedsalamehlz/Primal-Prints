@@ -124,8 +124,12 @@ function renderBench() {
 /* ---------- product modal ---------- */
 let current = null;
 
+/* Meta Pixel events (safe if the pixel is blocked) */
+const track = (ev, data) => { try { if (window.fbq) window.fbq("track", ev, Object.assign({ currency: "USD" }, data)); } catch (e) {} };
+
 function openProduct(id) {
   const p = byId[id]; if (!p) return; current = p;
+  track("ViewContent", { content_ids: [p.id], content_name: p.name, content_type: "product", value: lowPrice(p) });
   $("#m-cat").textContent = catName(p.cat);
   $("#m-title").textContent = p.name;
   $("#m-blurb").textContent = p.blurb;
@@ -230,6 +234,7 @@ function addToCart() {
   const same = cart.find(l => l.id === current.id && l.notes === notes && JSON.stringify(l.picks) === JSON.stringify(picks));
   if (same) same.qty = Math.min(cap, same.qty + qty); else cart.push({ id: current.id, picks, notes, qty: Math.min(qty, cap - inCart) });
   saveCart(); hide("#modal"); toast("Added to cart");
+  track("AddToCart", { content_ids: [current.id], content_name: current.name, content_type: "product", value: Math.round(priceFor(current, picks) * qty * 100) / 100 });
 }
 
 function renderCart() {
@@ -296,8 +301,10 @@ function setupCheckout() {
       },
       onApprove: (data, actions) => {
         const summary = orderSummary(), total = totals().total;
+        const ids = cart.map(l => l.id), items = cart.reduce((n, l) => n + l.qty, 0);
         return actions.order.capture().then((details) => {
         notifyOrder(summary, total, details, data);
+        track("Purchase", { content_ids: ids, content_type: "product", num_items: items, value: total });
         cart = []; saveCart(); hide("#cart");
         toast("Order placed — thank you!");
         setTimeout(() => alert("Thank you! Your order is confirmed. You'll get a PayPal receipt by email, and we'll email you when it ships."), 300);
@@ -418,7 +425,10 @@ function submitCustom(e) {
 let lastFocus = null;
 function show(sel) { lastFocus = document.activeElement; $(sel).hidden = false; document.body.style.overflow = "hidden"; const x = $(sel + " .x"); if (x) x.focus(); }
 function hide(sel) { $(sel).hidden = true; if ($("#modal").hidden && $("#cart").hidden) document.body.style.overflow = ""; if (lastFocus && lastFocus.focus) lastFocus.focus(); }
-function openCart() { renderCart(); show("#cart"); setupCheckout(); }
+function openCart() {
+  renderCart(); show("#cart"); setupCheckout();
+  if (cart.length) track("InitiateCheckout", { content_ids: cart.map(l => l.id), num_items: cart.reduce((n, l) => n + l.qty, 0), value: totals().total });
+}
 
 /* ---------- events ---------- */
 document.addEventListener("click", (e) => {
