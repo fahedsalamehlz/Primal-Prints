@@ -185,6 +185,18 @@ const PRODUCTS = [
     notes: true, notesHint: "Custom nameplate text, up to 12 letters (e.g. DETENTION, ARMY, NAVY)"
   },
   {
+    id: "halligan-coin", cat: "duty", featured: true, featuredRank: 2,
+    name: "Halligan Bar Challenge Coin Display",
+    blurb: "A challenge coin display built around the fire service's most iconic tool. A red Halligan bar rides on two posts above 5 angled coin slots, with a snap-in red FIRE nameplate up front, or your own station, engine or ladder number. A strong academy graduation, promotion, retirement or station gift.",
+    specs: ["Holds 5 coins", "Coins 1.5–2 in", "Snap-in nameplate", "9.4 x 3.9 x 5.2 in"],
+    price: 39.99, ship: 7,
+    images: ["photos/halligan_1.jpg", "photos/halligan_2.jpg", "photos/halligan_3.jpg", "photos/halligan_4.jpg"],
+    options: [
+      { label: "Nameplate", choices: [ { name: "FIRE" }, { name: "Custom text", add: 5, requiresNotes: true } ] }
+    ],
+    notes: true, notesHint: "Custom nameplate text, up to 14 letters (e.g. ENGINE 7, LADDER 12, STATION 3)"
+  },
+  {
     id: "coin-rack", cat: "duty",
     name: "Personalized Challenge Coin Display",
     blurb: "Shows off 7 challenge coins on a thin blue line rack with your name across the front.",
@@ -403,3 +415,10 @@ SECONDS.forEach(s => PRODUCTS.push(Object.assign({
   cat: "seconds", second: true, max: 1, ship: 7, specs: ["Cosmetic flaw", "Fully functional", "Only 1"],
   blurb: "A cosmetic second: it looks a little off but works exactly like a new one."
 }, s)));
+
+/* Halligan coin display: hold the 15% sale price through Dec 2 (matches Etsy) */
+(function () {
+  const t = new Intl.DateTimeFormat("en-CA", { timeZone: "America/Phoenix" }).format(new Date());
+  const p = PRODUCTS.find((x) => x.id === "halligan-coin");
+  if (p && t >= "2026-11-21" && t <= "2026-12-02") p.price = 33.99;
+})();
