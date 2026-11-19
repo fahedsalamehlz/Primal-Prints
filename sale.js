@@ -4,7 +4,7 @@
    To run another sale later, change start / end / percent / label below.
    OH SHOOT Bin items are left out (already marked down).
    ===================================================================== */
-const SALE = { start: "2026-11-17", end: "2026-11-20", percent: 15, label: "15% OFF EVERYTHING THROUGH FRIDAY", sub: "Prices already marked down. Ends Friday, Nov 20 at midnight (AZ)." };
+const SALE = { start: "2026-11-17", end: "2026-11-27", percent: 15, label: "15% OFF EVERYTHING THROUGH BLACK FRIDAY", sub: "Prices already marked down. Ends Black Friday, Nov 27 at midnight (AZ)." };
 
 (function () {
   const today = new Intl.DateTimeFormat("en-CA", { timeZone: "America/Phoenix" }).format(new Date());
