@@ -100,6 +100,17 @@ const PRODUCTS = [
         { name: "Extra Clips 2-Pack", price: 15.99 } ] }
     ]
   },
+  {
+    id: "wall-pistol-holder", cat: "safe",
+    name: "Wall-Mount Pistol Holder with Spare Mag Pouch",
+    blurb: "Keeps your pistol and a spare mag within reach on the wall, beside the bed, or inside a safe. The pistol sits muzzle-down with the trigger guard fully enclosed by rigid walls, and a built-in spring tongue holds the slide snug so it won't rattle but draws with a firm pull. The grip stands clear of the wall for a full firing grip, and the side pouch holds a spare mag base-up with its own spring retention. Mounts with 4 screws (not included). Check the fit with your firearm unloaded before use.",
+    specs: ["Glock 43X / 48 rail with TLR-7 Sub", "Red-dot friendly", "Spare mag pouch", "5.8 x 3 x 3.9 in", "PETG"],
+    price: 35.99, ship: 7,
+    images: ["wall-holder_1.jpg", "wall-holder_2.jpg", "wall-holder_3.jpg", "wall-holder_4.jpg", "wall-holder_5.jpg"],
+    options: [
+      { label: "Grip points", choices: [ { name: "Left (as pictured)" }, { name: "Right" } ] }
+    ]
+  },
 
   /* ---------------- RANGE & AMMO ---------------- */
   {
