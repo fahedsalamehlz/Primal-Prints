@@ -363,8 +363,21 @@ function submitCustom(e) {
     toast("Couldn't send. Opening your email app instead…");
     location.href = "mailto:" + SETTINGS.CUSTOM_EMAIL + "?subject=" + encodeURIComponent("Custom order request from " + v("name")) + "&body=" + encodeURIComponent(body);
   };
+  // FormSubmit can take 30+ seconds to answer. Send with keepalive so it finishes in the
+  // background, and show "sent" after a few seconds unless it fails fast.
+  let settled = false;
+  const showDone = () => {
+    if (settled) return; settled = true;
+    const done = document.createElement("div");
+    done.className = "form form-done";
+    done.innerHTML = `<h3>Request sent ✓</h3><p>Thanks, ${v("name").split(" ")[0].replace(/[<>&"]/g, "")}. We'll email a quote to <b></b> within 24–48 hours.</p><p class="fine">Didn't get a reply? Check your spam folder or email <a href="mailto:${SETTINGS.CUSTOM_EMAIL}">${SETTINGS.CUSTOM_EMAIL}</a>.</p>`;
+    done.querySelector("b").textContent = v("email");
+    f.replaceWith(done);
+    toast("Quote request sent");
+  };
+  const fail = () => { if (settled) return; settled = true; fallback(); };
   fetch("https://formsubmit.co/ajax/" + SETTINGS.ORDER_EMAIL, {
-    method: "POST",
+    method: "POST", keepalive: true,
     headers: { "Content-Type": "application/json", "Accept": "application/json" },
     body: JSON.stringify({
       _subject: "Custom quote request: " + v("name"),
@@ -377,13 +390,9 @@ function submitCustom(e) {
     })
   }).then(r => r.json()).then(j => {
     if (!j || String(j.success) !== "true") throw new Error("send failed");
-    const done = document.createElement("div");
-    done.className = "form form-done";
-    done.innerHTML = `<h3>Request sent ✓</h3><p>Thanks, ${v("name").split(" ")[0].replace(/[<>&"]/g, "")}. We'll email a quote to <b></b> within 24–48 hours.</p><p class="fine">Didn't get a reply? Check your spam folder or email <a href="mailto:${SETTINGS.CUSTOM_EMAIL}">${SETTINGS.CUSTOM_EMAIL}</a>.</p>`;
-    done.querySelector("b").textContent = v("email");
-    f.replaceWith(done);
-    toast("Quote request sent");
-  }).catch(fallback);
+    showDone();
+  }).catch(fail);
+  setTimeout(showDone, 3500);
 }
 
 /* ---------- overlays ---------- */
