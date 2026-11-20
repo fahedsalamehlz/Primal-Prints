@@ -126,6 +126,8 @@ let current = null;
 
 /* Meta Pixel events (safe if the pixel is blocked) */
 const track = (ev, data) => { try { if (window.fbq) window.fbq("track", ev, Object.assign({ currency: "USD" }, data)); } catch (e) {} };
+// Armanet sales tracking (ad network): one "purchased" event per paid order. No names, emails or addresses are sent.
+const armanetPurchase = (orderId, t, items) => { try { if (window.Armanet && window.Armanet.sendEvent) window.Armanet.sendEvent("purchased", { orderNumber: String(orderId || Date.now()), subtotal: +t.sub.toFixed(2), shipping: +t.ship.toFixed(2), orderTotal: +t.total.toFixed(2), currency: "USD", items: items }); } catch (e) {} };
 
 function openProduct(id) {
   const p = byId[id]; if (!p) return; current = p;
@@ -302,9 +304,11 @@ function setupCheckout() {
       onApprove: (data, actions) => {
         const summary = orderSummary(), total = totals().total;
         const ids = cart.map(l => l.id), items = cart.reduce((n, l) => n + l.qty, 0);
+        const t0 = totals(), aItems = cart.map(l => { const { p, unit } = lineInfo(l); return { itemId: l.id, itemName: p.name.slice(0, 100), sku: l.id, price: +unit.toFixed(2), quantity: l.qty }; });
         return actions.order.capture().then((details) => {
         notifyOrder(summary, total, details, data);
         track("Purchase", { content_ids: ids, content_type: "product", num_items: items, value: total });
+        armanetPurchase(details && details.id, t0, aItems);
         cart = []; saveCart(); hide("#cart");
         toast("Order placed — thank you!");
         setTimeout(() => alert("Thank you! Your order is confirmed. You'll get a PayPal receipt by email, and we'll email you when it ships."), 300);
