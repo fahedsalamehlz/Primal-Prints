@@ -234,6 +234,17 @@ const PRODUCTS = [
     options: [ { label: "Size", choices: [ { name: "Single (holds 1)", price: 16.99 }, { name: "Double (holds 2)", price: 22.99 } ] } ]
   },
   {
+    id: "tbl-switch-plate", cat: "duty",
+    name: "Thin Blue Line Light Switch Cover",
+    blurb: "Show your support every time you hit the lights. The flag is printed right into the plate in black, white and blue, so the colors are part of the plastic and won't peel, fade or scratch off like a sticker. Fits standard single-gang switches and outlets and installs in a minute with the screws from your old plate. Snug the screws by hand; overtightening can crack the plate. Decorative cover, not UL listed.",
+    specs: ["Standard 2.75 x 4.5 in", "Rocker, toggle or outlet", "Uses your existing screws", "PETG"],
+    price: 16.99, ship: 7,
+    images: ["photos/tbl-switch_1.jpg", "photos/tbl-switch_2.jpg", "photos/tbl-switch_3.jpg", "photos/tbl-switch_4.jpg"],
+    options: [
+      { label: "Plate type", choices: [ { name: "Rocker / Decora switch (as pictured)" }, { name: "Toggle switch" }, { name: "Outlet" } ] }
+    ]
+  },
+  {
     id: "card-holder", cat: "desk",
     name: "Tactical Pistol Business Card Holder",
     blurb: "The pistol sits inverted on its stand and cards feed up through a slot in the frame. Add a name or badge number on the base.",
