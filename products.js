@@ -239,7 +239,7 @@ const PRODUCTS = [
     blurb: "Show your support every time you hit the lights. The flag is printed right into the plate in black, white and blue, so the colors are part of the plastic and won't peel, fade or scratch off like a sticker. Fits standard single-gang switches and outlets and installs in a minute with the screws from your old plate. Snug the screws by hand; overtightening can crack the plate. Decorative cover, not UL listed.",
     specs: ["Standard 2.75 x 4.5 in", "Rocker, toggle or outlet", "Uses your existing screws", "PETG"],
     price: 16.99, ship: 7,
-    images: ["photos/tbl-switch_1.jpg", "photos/tbl-switch_2.jpg", "photos/tbl-switch_3.jpg", "photos/tbl-switch_4.jpg"],
+    images: ["photos/tbl-switch_3.jpg", "photos/tbl-switch_1.jpg", "photos/tbl-switch_2.jpg", "photos/tbl-switch_4.jpg"],
     options: [
       { label: "Plate type", choices: [ { name: "Rocker / Decora switch (as pictured)" }, { name: "Toggle switch" }, { name: "Outlet" } ] }
     ]
