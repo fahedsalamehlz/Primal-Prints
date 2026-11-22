@@ -26,6 +26,9 @@
    OH SHOOT Bin (cosmetic flaws, fully working, one of each) items are in SECONDS at the bottom.
    ===================================================================== */
 
+// Color choices for the coaster sets (keep in sync with Etsy)
+const COASTER_COLORS = () => ["Black", "Gray", "Blue", "White", "Red", "OD Green"].map((name) => ({ name }));
+
 const ETSY = "https://i.etsystatic.com/67938469/r/il/";
 const img = (h) => ETSY + h.split("/")[0] + "/" + h.split("/")[1].split("_")[0] +
                    "/il_794xN." + h.split("/")[1] + ".jpg";
@@ -334,7 +337,12 @@ const PRODUCTS = [
     specs: ["PETG", "Cork backed", "Custom name"],
     price: 27.99, ship: 7,
     images: ["8919ad/8756722973_mqt1", "19c5f4/8756722971_5web", "023bc8/8756722975_75ln", "2a4267/8708906496_6vzl"].map(img),
-    options: [ { label: "Set", choices: [ { name: "Caddy + 4 coasters", price: 27.99 }, { name: "Caddy only", price: 18.99 } ] } ],
+    options: [
+      { label: "Set", choices: [ { name: "Caddy + 4 coasters", price: 27.99 }, { name: "Caddy only", price: 18.99 } ] },
+      { label: "Caddy color", choices: COASTER_COLORS() },
+      { label: "Target color", choices: COASTER_COLORS() },
+      { label: "Outline color", choices: COASTER_COLORS() }
+    ],
     notes: true, notesRequired: true, notesHint: "Name for the plate (2 lines max)"
   },
   {
@@ -344,8 +352,22 @@ const PRODUCTS = [
     specs: ["PETG", "Cork backed", "Custom plaque"],
     price: 24.99, ship: 7,
     images: ["cf2f6a/8650359806_1v6t", "9b660e/8650359804_jltn", "ef16ef/8698187301_9act", "aacc9d/8650359808_etpz"].map(img),
-    options: [ { label: "Set", choices: [ { name: "Can + 4 coasters", price: 24.99 }, { name: "Can only", price: 16.99 } ] } ],
+    options: [
+      { label: "Set", choices: [ { name: "Can + 4 coasters", price: 24.99 }, { name: "Can only", price: 16.99 } ] },
+      { label: "Main color", choices: COASTER_COLORS() },
+      { label: "Font / outline color", choices: COASTER_COLORS() },
+      { label: "Plate background", choices: COASTER_COLORS() }
+    ],
     notes: true, notesRequired: true, notesHint: "Plaque text + reticle or bullseye"
+  },
+  {
+    id: "tbl-coasters", cat: "desk",
+    name: "Thin Blue Line Coaster Set",
+    blurb: "Four thin blue line flag coasters in a round caddy with a custom two-line name plate: name, rank, badge number or department. PETG, cork backed.",
+    specs: ["PETG", "Cork backed", "2-line name plate"],
+    price: 24.99, ship: 7,
+    images: ["photos/tbl-coasters-1.jpg", "photos/tbl-coasters-2.jpg", "photos/tbl-coasters-3.jpg", "photos/tbl-coasters-4.jpg"],
+    notes: true, notesRequired: true, notesHint: "Name plate text, 2 lines (e.g. Ofc. J. Smith / Badge 1234)"
   },
   {
     id: "name-coasters", cat: "desk",
@@ -354,7 +376,11 @@ const PRODUCTS = [
     specs: ["PETG", "Cork backed", "2-line name plate"],
     price: 24.99, ship: 7,
     images: ["851f1e/8756696427_ffow", "0e8b9a/8756692973_912y", "5a5ef4/8756692971_hm2f", "8aab7a/8756692981_3kx0"].map(img),
-    options: [ { label: "Set", choices: [ { name: "Caddy + 4 coasters", price: 24.99 }, { name: "Caddy only", price: 16.99 } ] } ],
+    options: [
+      { label: "Set", choices: [ { name: "Caddy + 4 coasters", price: 24.99 }, { name: "Caddy only", price: 16.99 } ] },
+      { label: "Main color", choices: COASTER_COLORS() },
+      { label: "Font / outline color", choices: COASTER_COLORS() }
+    ],
     notes: true, notesRequired: true, notesHint: "Name plate text + coaster design"
   },
 
