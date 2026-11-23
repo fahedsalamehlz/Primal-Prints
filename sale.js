@@ -5,14 +5,19 @@
    OH SHOOT Bin items are left out (already marked down).
    ===================================================================== */
 const SALE = { start: "2026-11-17", end: "2026-12-02", percent: 15, label: "15% OFF EVERYTHING THROUGH DEC 2", sub: "Black Friday through Cyber Week. Prices already marked down. Ends Wednesday, Dec 2 at midnight (AZ)." };
+/* Bigger discounts on single items (matches Etsy). Each runs start..end (AZ), then falls back to the main sale. */
+const SALE_ITEMS = { "safe-set": { start: "2026-11-19", end: "2026-11-27", percent: 20 } };
 
 (function () {
   const today = new Intl.DateTimeFormat("en-CA", { timeZone: "America/Phoenix" }).format(new Date());
   if (today < SALE.start || today > SALE.end) return;
   const f = 1 - SALE.percent / 100;
-  const off = (n) => Math.round(n * f * 100) / 100;
   PRODUCTS.forEach((p) => {
     if (p.second) return;
+    const it = SALE_ITEMS[p.id];
+    const pf = (it && today >= it.start && today <= it.end) ? 1 - it.percent / 100 : f;
+    p.saleF = pf;
+    const off = (n) => Math.round(n * pf * 100) / 100;
     if (typeof p.price === "number") p.price = off(p.price);
     (p.options || []).forEach((o) => (o.choices || []).forEach((c) => {
       if (typeof c.price === "number") c.price = off(c.price);

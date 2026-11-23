@@ -43,7 +43,7 @@ function lowPrice(p) {
 }
 const hasRange = (p) => (p.options || []).some(o => o.choices.some(c => "price" in c || "add" in c));
 /* sale: show the regular price crossed out */
-const wasHTML = (p, n) => (window.SALE_ACTIVE && window.SALE_F && !p.second) ? `<s class="was">${money(Math.round(n / window.SALE_F * 100) / 100)}</s>` : "";
+const wasHTML = (p, n) => { const f = p.saleF || window.SALE_F; return (window.SALE_ACTIVE && f && !p.second) ? `<s class="was">${money(Math.round(n / f * 100) / 100)}</s>` : ""; };
 
 /* ---------- shop rendering ---------- */
 let activeCat = "all";
