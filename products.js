@@ -331,6 +331,16 @@ const PRODUCTS = [
 
   /* ---------------- COASTERS & DESK ---------------- */
   {
+    id: "edc-valet-tray", cat: "desk", featured: true, featuredRank: 0,
+    name: "Personalized EDC Valet Tray with Charging Phone Stand",
+    blurb: "Keeps your phone, wallet, keys, watch, knife and flashlight in one place on the nightstand or desk, and charges your phone while it sits. Your cable runs under the tray and comes up through the floor of the stand, so the phone sits right on its plug. Fits large phones in most cases, including rugged cases. Wide flashlight / knife channel, big wallet and watch pockets that run back past the stand, and a small pocket for pens or change. Snap-in Thin Blue Line flag and custom name plate, no glue. Charging cable not included.",
+    specs: ["Charging phone stand", "Snap-in TBL flag + name plate", "8.5 x 6.7 x 2.9 in", "PETG"],
+    price: 34.99, ship: 6,
+    images: ["edc-tray_1.jpg", "edc-tray_2.jpg", "edc-tray_3.jpg"],
+    notes: true, notesRequired: true,
+    notesHint: "Name and/or badge # for the name plate, up to 20 characters (e.g. J. SMITH #12345)"
+  },
+  {
     id: "ipsc-coasters", cat: "desk",
     name: "IPSC Target Coaster Set",
     blurb: "Four silhouette coasters with A, C and D zones in a target-shaped caddy with your name on the plate. PETG, cork backed.",
