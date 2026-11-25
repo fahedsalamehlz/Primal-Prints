@@ -337,6 +337,9 @@ const PRODUCTS = [
     specs: ["Charging phone stand", "Snap-in TBL flag + name plate", "8.5 x 6.7 x 2.9 in", "PETG"],
     price: 34.99, ship: 6,
     images: ["edc-tray_1.jpg", "edc-tray_2.jpg", "edc-tray_3.jpg"],
+    options: [
+      { label: "Name text color", choices: [ { name: "Blue (on black plate)" }, { name: "Red (on black plate)" }, { name: "Gray (on black plate)" }, { name: "Black (on gray plate)" } ] }
+    ],
     notes: true, notesRequired: true,
     notesHint: "Name and/or badge # for the name plate, up to 20 characters (e.g. J. SMITH #12345)"
   },
@@ -347,6 +350,9 @@ const PRODUCTS = [
     specs: ["Charging phone stand", "Sunglasses stand", "Snap-in TBL flag + name plate", "9.9 x 6.7 x 3.5 in", "PETG"],
     price: 44.99, ship: 6,
     images: ["edc-tray-xl_1.jpg", "edc-tray-xl_2.jpg", "edc-tray-xl_3.jpg"],
+    options: [
+      { label: "Name text color", choices: [ { name: "Blue (on black plate)" }, { name: "Red (on black plate)" }, { name: "Gray (on black plate)" }, { name: "Black (on gray plate)" } ] }
+    ],
     notes: true, notesRequired: true,
     notesHint: "Name and/or badge # for the name plate, up to 20 characters (e.g. J. SMITH #12345)"
   },
