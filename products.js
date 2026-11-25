@@ -341,6 +341,16 @@ const PRODUCTS = [
     notesHint: "Name and/or badge # for the name plate, up to 20 characters (e.g. J. SMITH #12345)"
   },
   {
+    id: "edc-valet-tray-xl", cat: "desk",
+    name: "Personalized EDC Valet Tray XL with Charging Phone Stand + Sunglasses Stand",
+    blurb: "Everything the original tray does, plus a built-in sunglasses stand. Your phone charges in the stand: the cable runs under the tray and comes up through the floor, so the phone sits right on its plug, and it fits large phones in most cases, including rugged cases. The nose-shaped glasses post in the back corner holds folded sunglasses by the bridge, with the folded arms resting on its back slope so they don't tip, and it fits Ray-Ban and Oakley style frames. Wider flashlight / knife channel, big wallet and watch pockets, and a pocket for pens or change. Snap-in Thin Blue Line flag and custom name plate, no glue. Charging cable not included.",
+    specs: ["Charging phone stand", "Sunglasses stand", "Snap-in TBL flag + name plate", "9.9 x 6.7 x 3.5 in", "PETG"],
+    price: 44.99, ship: 6,
+    images: ["edc-tray-xl_1.jpg", "edc-tray-xl_2.jpg", "edc-tray-xl_3.jpg"],
+    notes: true, notesRequired: true,
+    notesHint: "Name and/or badge # for the name plate, up to 20 characters (e.g. J. SMITH #12345)"
+  },
+  {
     id: "ipsc-coasters", cat: "desk",
     name: "IPSC Target Coaster Set",
     blurb: "Four silhouette coasters with A, C and D zones in a target-shaped caddy with your name on the plate. PETG, cork backed.",
