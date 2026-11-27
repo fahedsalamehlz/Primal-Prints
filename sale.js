@@ -8,6 +8,7 @@ const SALE_GROUPS = [
   { percent: 25, start: "2026-11-25", end: "2026-12-08", ids: [                                     // Etsy BIGITEMS25B
       "edc-valet-tray-xl", "edc-valet-tray", "halligan-coin", "shield-coin", "tbl-flag",
       "tbl-tree-light", "tbl-tree-name", "safe-set", "mag-stocking", "seat-kit"] },
+  { percent: 10, start: "2026-11-27", end: "2026-12-08", ids: ["9mm-can-set"] },                    // Website $10 off ($99.99 -> $89.99)
   { percent: 20, start: "2026-11-19", end: "2026-11-27", ids: ["safe-set"] },                       // Etsy SAFESET20BF
   { percent: 15, start: "2026-11-18", end: "2026-12-02", ids: ["halligan-coin"] },                  // Etsy HALLIGAN15
   { percent: 15, start: "2026-11-12", end: "2026-12-08", ids: [                                     // Etsy HOLIDAY15B
